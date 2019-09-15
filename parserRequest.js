@@ -87,7 +87,6 @@ module.exports = class ParserRequest{
         {cwd: `./${this.path}`,
         maxBuffer: 1000000}, (err, out) => {
             if(err) return res.send(err)
-            console.log('урааа добавил репу')
             res.send('added new repo')
         })
     }
