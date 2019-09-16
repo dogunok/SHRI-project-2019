@@ -1,21 +1,10 @@
 const process = require('process');
-// const { execFile} = require('child_process');
 const ParserRequest = require('../parserRequest.js');
 const pathStart = process.argv[2];
 const newRequest = new ParserRequest(pathStart)
 
 
 const router = app => {
-    app.get('/', (req, res) => {
-        // execFile('git' , ['diff', '37d4671f', 'be929625e'], (err, out) => {
-
-        //     console.log(out['cmd'])
-            
-        //     err ? res.send(err) : res.send(out.split('@@')[2])
-        // })
-        // console.log('зашел на домашнюю страницу')
-        // newRequest.getAllCommits(req, res)
-    });
 
     app.get(`/${pathStart}`, (req, res) => {
         newRequest.getAllRepos(req, res)
