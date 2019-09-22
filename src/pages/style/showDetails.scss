@@ -54,6 +54,7 @@ $indentAroundBody: 32px;
     &__contents-code{
         margin-left: 15px;
         li{
+            position: relative;
             padding-left: 32px;
             padding-top: 5px;
             font-family: PT Mono;
@@ -75,12 +76,21 @@ $indentAroundBody: 32px;
                 color: $blueColor;
                 font-weight: bold;
             }
+
+                position: relative;
+                &::before{
+                    position: absolute;
+                    width: 5px;
+                    height: 5px;
+                    content: '';
+                    background-color: white;
+                    left: -13px;
+                    top: 15px;
+                }
         }
 
         .type-string{
             color: $blueColor;
         }
     }
-
-
 }

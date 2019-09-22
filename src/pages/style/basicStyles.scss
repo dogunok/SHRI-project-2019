@@ -269,7 +269,9 @@ $borderSizeActiveElem: 3px;
         margin-left: $indentAroundBody;
         margin-right:$indentAroundBody;
 
-
+        // &-mobile{
+        //     display: none;
+        // }
         .name-columns{
             display: grid;
             grid-template-columns: 1fr 1fr 2fr 1fr 1fr;
@@ -340,8 +342,6 @@ $borderSizeActiveElem: 3px;
             }
         }
     }
-
-    
 }
 
 .footer{
