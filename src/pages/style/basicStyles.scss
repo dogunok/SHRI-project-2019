@@ -341,60 +341,7 @@ $borderSizeActiveElem: 3px;
         }
     }
 
-    .show-file{
-        margin-left: $indentAroundBody;
-        margin-right: $indentAroundBody;
-        // height: 237px;
-        border: 1px solid #E5E5E5;
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
-        &__name{
-            padding: 14px 0px 8px 16px;
-            background-color: #F5F5F5;
-        }
-        &__size{
-            color: #999999;
-        }
-        .picture{
-            display: inline-block;
-            padding-right: 8px
-        }
-        h2{
-            margin-top: 25px;
-            margin-left: 32px;
-        }
-
-        p{
-            margin-left: 32px;
-            margin-right: 216px;
-            font-size: 14px;
-            line-height: 18px;
-        }
-
-        &__contents-code{
-
-            li{
-                padding-left: 32px;
-                padding-top: 5px;
-                font-family: PT Mono;
-                font-style: normal;
-                font-weight: normal;
-                font-size: 12px;
-                line-height: 20px;
-                color: #8694A2;
-
-                &:first-child{
-                    color: #999999;
-                }
-            }
-
-            .type-string{
-                color: $blueColor;
-            }
-        }
-
-
-    }
+    
 }
 
 .footer{
