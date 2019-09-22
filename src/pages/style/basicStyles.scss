@@ -99,13 +99,14 @@ $borderSizeActiveElem: 3px;
         display: flex;
         flex-direction: row;
         justify-content: flex-start;
+        flex-wrap: wrap;
         align-items: center;
         height: 42px;
         margin-left: $indentAroundBody;
         margin-right:$indentAroundBody;
         border-bottom: 1px solid $mainBorderColor;
         font-size: 14px;
-        
+
         &_item{
             margin-right: 20px;
             list-style: none;
