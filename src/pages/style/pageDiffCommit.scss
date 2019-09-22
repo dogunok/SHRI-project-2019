@@ -1,0 +1,100 @@
+.main .show-file__contents{
+
+    &-source, &-build{
+        list-style: none;
+    }
+
+    &_diff{
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+        position: relative;
+    }
+
+    &-source{
+        position: absolute;
+        width: 100%;
+    }
+
+    &-build{
+        width: max-content;
+    }
+
+    li{
+        .added-code{
+            &::before{
+                position: absolute !important;
+                top: 0px !important;
+                left: -39px !important;
+                width: 45px!important;
+                height: 25px !important;
+                content: '' !important;
+                background-color: #E6FFED !important;
+            }
+        }
+
+        .delete-code{
+            &::before{
+                position: absolute !important;
+                top: 0px !important;
+                left: -39px !important;
+                width: 45px!important;
+                height: 25px !important;
+                content: '' !important;
+                background-color: #FFEEF0 !important;
+            }
+        }
+
+        .hidden{
+            visibility: hidden;
+        }
+    }
+
+    .source-code{
+        padding-left: 70px;
+
+
+    }
+
+    &-code{
+        margin-left: 0;
+    }
+
+    .delete-code{
+        background-color: #FFEEF0;
+    }
+
+    .added-code{
+        background-color: #E6FFED;
+    }
+}
+
+.clone-file{
+    margin-right: 10px;
+    padding: 1px 6px;
+    cursor: pointer;
+    // border: 1px solid #999;
+    border-radius: 3px;
+
+    .add-simbol{
+        color: #19BC4D;
+        font-size: 14px;
+    }
+
+    .delete-simbol{
+        color: #FF3029;
+        font-size: 14px;
+    }
+}
+
+.main__commit-name {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .btn-show-file{
+        padding: 0 15px;
+        background-color: #E6E6E6;
+        font-size: 13px;
+        border-radius: 5px;
+    }
+}
