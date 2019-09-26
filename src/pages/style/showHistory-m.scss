@@ -1,0 +1,66 @@
+@media screen and (max-width: 1121px) and (min-width: 676px){
+    .info-commit-line{
+        &::after{
+            left: 18px !important;
+            width: 63px !important;
+            margin-top: 72px !important;
+        }
+    }
+}
+
+@media screen and (max-width: 675px) and (min-width: 481px){
+    &::after{
+        left: 9px !important;
+        width: 80px !important;
+        margin-top: 81px !important;
+    }
+}
+
+@media screen and (max-width: 480px) and (min-width: 471px){
+    &::after{
+        left: 0px !important;
+        width: 100px !important;
+        margin-top: 90px !important;
+    }
+}
+
+@media screen and (max-width: 470px) and (min-width: 457px){
+    &::after{
+        left: -11px !important;
+        width: 117px !important;
+        margin-top: 98px !important;
+    }
+}
+
+@media screen and (max-width: 456px) and (min-width: 375px){
+    &::after{
+        left: -27px !important;
+        width: 151px !important;
+        margin-top: 117px !important;
+    }
+}
+
+@media screen and (max-width: 374px) and (min-width: 366px){
+    &::after{
+        left: -37px !important;
+        width: 172px !important;
+        margin-top: 125px !important;
+    }
+}
+
+@media screen and (max-width: 365px) and (min-width: 363px){
+    &::after{
+        left: -46px !important;
+        width: 190px !important;
+        margin-top: 134px !important;
+    }
+}
+
+
+@media screen and (max-width: 362px){
+    &::after{
+        left: -55px !important;
+        width: 207px !important;
+        margin-top: 144px !important;
+    }
+}
