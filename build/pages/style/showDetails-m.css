@@ -1,0 +1,26 @@
+@media screen and (max-width: 768px)
+{
+    .header
+    {
+        margin-top: 20px;
+    }
+    .main__repo-path
+    {
+        flex-wrap: wrap;
+    }
+    .show-file
+    {
+        margin-right: 0;
+        margin-left: 0; 
+
+        border: none;
+    }
+    .show-file__contents
+    {
+        word-break: break-all;
+    }
+    .show-file__contents li
+    {
+        padding-left: 10px;
+    }
+}

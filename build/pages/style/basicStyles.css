@@ -1,0 +1,432 @@
+.header
+{
+    display: flex;
+    flex-direction: row;
+
+    height: 55px;
+    padding-left: 32px;
+
+    border-bottom: 1px solid #f0f2f3; 
+
+    justify-content: flex-start;
+    align-items: center;
+}
+.header__repo
+{
+    position: relative; 
+
+    margin-left: 40px;
+
+    cursor: pointer;
+}
+.header__repo-text
+{
+    font-size: 14px;
+    font-weight: 110;
+    line-height: 18px;
+
+    position: relative;
+
+    display: inline;
+
+    padding-bottom: 18.5px;
+}
+.header__repo-text::after
+{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    width: 100%;
+
+    content: '';
+    pointer-events: none; 
+
+    border-bottom: 3px solid #ff4f49;
+}
+.header__repo_list
+{
+    position: absolute;
+
+    display: none;
+    overflow: scroll;
+
+    box-sizing: border-box;
+    width: 266px;
+    height: 124px;
+    padding: 14px 0 18px 22px;
+
+    cursor: default; 
+
+    background-color: #fff;
+    box-shadow: 0 4px 16px rgba(53, 73, 93, .2);
+}
+.header__repo_list-name
+{
+    font-size: 14px;
+    line-height: 20px;
+
+    overflow: scroll;
+
+    margin-top: 16px; 
+
+    list-style: none;
+}
+.header__repo_list-name:first-child
+{
+    margin-top: 0;
+}
+.header__repo_list-name a
+{
+    display: inline-block;
+
+    width: 100%; 
+
+    text-decoration: none;
+
+    color: #000;
+}
+.header__repo:hover .header__toggle-icon
+{
+    transform: rotate(180deg);
+}
+.header__repo:hover .header__repo_list
+{
+    display: block;
+}
+.header__toggle-icon
+{
+    margin-left: 6px;
+}
+
+.main__repo-path
+{
+    font-size: 14px; 
+
+    display: flex;
+    flex-direction: row;
+
+    height: 42px;
+    margin-right: 32px;
+    margin-left: 32px;
+
+    border-bottom: 1px solid #e5e5e5;
+
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.main__repo-path_item
+{
+    margin-right: 20px;
+
+    list-style: none;
+
+    color: #7f8285;
+}
+.main__repo-path_item span
+{
+    margin-left: 20px;
+}
+.main__repo-path_item:last-child
+{
+    margin-right: 0;
+
+    color: #000;
+}
+
+.main__commit-name
+{
+    font-size: 24px;
+    line-height: 28px; 
+
+    display: inline-block;
+
+    margin: 12px 32px 0 32px;
+}
+.main__commit-name .selected-commit
+{
+    position: relative;
+
+    display: inline-block;
+
+    padding-bottom: 10px;
+
+    color: #7f8285;
+}
+.main__commit-name .selected-commit:hover
+{
+    cursor: pointer;
+}
+.main__commit-name .selected-commit:hover .main__toggle-icon
+{
+    transform: rotate(180deg);
+}
+.main__commit-name .selected-commit:hover .commit__list
+{
+    display: block;
+}
+.main__commit-name .selected-commit .commit__list
+{
+    font-size: 14px;
+    line-height: 20px;
+
+    position: absolute;
+
+    display: none;
+    overflow: scroll;
+
+    box-sizing: border-box;
+    width: 320px;
+    height: 356px;
+    margin-bottom: 0;
+    padding: 10px 0 0 0;
+
+    background: #fff;
+    box-shadow: 0 4px 16px rgba(53, 73, 93, .2);
+}
+.main__commit-name .selected-commit .commit__list_item
+{
+    font-size: 14px;
+    line-height: 20px; 
+
+    padding: 8px 12px;
+
+    list-style: none;
+}
+.main__commit-name .selected-commit .commit__list_item-selected
+{
+    margin-bottom: 4px;
+    padding-left: 12px; 
+
+    background-color: #4f4f4f;
+}
+.main__commit-name .selected-commit .commit__list_item-selected .commit__list_item-name
+{
+    color: #f2f2f2;
+}
+.main__commit-name .selected-commit .commit__list_item-selected .commit__list_item-date-change
+{
+    color: #e0e0e0;
+}
+.main__commit-name .selected-commit .commit__list_item-name
+{
+    color: #434445;
+}
+.main__commit-name .selected-commit .commit__list_item-change
+{
+    color: #7f8285;
+}
+.main__commit-name .selected-commit .commit__list_item:nth-child(2)
+{
+    position: relative; 
+
+    padding-top: 14px;
+}
+.main__commit-name .selected-commit .commit__list_item:nth-child(2)::before
+{
+    position: absolute;
+    top: -1px; 
+
+    width: 292px;
+
+    content: '';
+
+    border-top: 1px solid #e5e5e5;
+}
+.main__commit-name .selected-commit .commit__list_item:hover:not(.commit__list_item-selected)
+{
+    background-color: #f4f5f6;
+}
+.main__commit-name .main__toggle-icon
+{
+    fill: #7f8285;
+}
+
+.main__commit-data
+{
+    font-size: 14px;
+    line-height: 20px; 
+
+    margin-right: 32px;
+    margin-bottom: 19px;
+    margin-left: 32px;
+}
+.main__commit-data_hash
+{
+    color: #1774e9;
+}
+.main__commit-data_date
+{
+    color: #1774e9;
+}
+.main__commit-data .autor-commit
+{
+    display: inline-block;
+}
+.main__commit-data .autor-commit::first-letter
+{
+    color: #ff3029;
+}
+
+.main__navigation
+{
+    margin-right: 32px;
+    margin-left: 32px;
+    padding-bottom: 10px;
+
+    border-bottom: 1px solid #f0f2f3;
+}
+.main__navigation_item
+{
+    font-size: 16px;
+    line-height: 20px; 
+
+    margin-left: 32px;
+
+    text-decoration: none;
+
+    color: #7f8285;
+}
+.main__navigation_item:first-child
+{
+    margin-left: 0;
+}
+.main__navigation_item-active
+{
+    position: relative;
+
+    color: black;
+}
+.main__navigation_item-active::after
+{
+    position: absolute;
+    bottom: -11px;
+    left: 0;
+
+    width: 100%;
+
+    content: '';
+    pointer-events: none; 
+
+    border-bottom: 3px solid #ff4f49;
+}
+
+.main__all-files
+{
+    margin-right: 32px; 
+    margin-left: 32px;
+}
+.main__all-files .name-columns
+{
+    display: grid;
+
+    padding-bottom: 8px;
+    padding-left: 0;
+
+    border-bottom: 1px solid #f0f2f3; 
+
+    grid-template-columns: 1fr 1fr 2fr 1fr 1fr;
+    justify-content: space-between;
+}
+.main__all-files .name-columns li
+{
+    font-size: 14px;
+    line-height: 20px;
+
+    list-style: none; 
+
+    color: #b8bec3;
+}
+.main__all-files .name-columns li:first-child
+{
+    margin-left: 8px;
+}
+.main__all-files .name-columns li:last-child
+{
+    margin-right: 8px;
+
+    text-align: right;
+}
+.main__all-files .info-file
+{
+    display: grid;
+
+    padding-bottom: 8px;
+    padding-left: 0;
+
+    border-bottom: 1px solid #f0f2f3; 
+
+    grid-template-columns: 1fr 1fr 2fr 1fr 1fr;
+    justify-content: space-between;
+}
+.main__all-files .info-file .link-commit
+{
+    text-decoration: none;
+}
+.main__all-files .info-file li
+{
+    font-size: 14px;
+    line-height: 20px;
+
+    list-style: none;
+}
+.main__all-files .info-file li:first-child
+{
+    margin-left: 8px;
+}
+.main__all-files .info-file li:last-child
+{
+    margin-right: 8px;
+
+    text-align: right;
+}
+.main__all-files .info-file .name-file .picture
+{
+    display: inline-block;
+
+    padding-right: 8px;
+}
+.main__all-files .info-file .hash-commit
+{
+    color: #1774e9;
+}
+.main__all-files .info-file .commiter::first-letter
+{
+    color: #ff3029;
+}
+.main__all-files .info-file:last-child
+{
+    border-bottom: 0;
+}
+
+.footer
+{
+    font-size: 13px;
+    line-height: 18px;
+
+    display: flex;
+    flex-direction: row;
+
+    padding: 18px 20px 14px;
+
+    color: #7f8285; 
+    border-top: 1px solid #f0f2f3;
+
+    justify-content: space-between;
+}
+.footer .date
+{
+    display: flex;
+    flex-direction: row;
+}
+.footer .date a
+{
+    text-decoration: none;
+
+    color: #1774e9;
+}
+.footer .date .years
+{
+    margin-left: 32px;
+}
