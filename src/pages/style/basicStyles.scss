@@ -318,7 +318,9 @@ $borderSizeActiveElem: 3px;
             padding-left: 0;
             padding-bottom: 8px;
             border-bottom: 1px solid $borderColor;
-
+            &[data-visibility="false"]{
+                display: none
+            }
             .link-commit{
                 text-decoration: none;
             }

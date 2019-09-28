@@ -376,6 +376,10 @@
     grid-template-columns: 1fr 1fr 2fr 1fr 1fr;
     justify-content: space-between;
 }
+.main__all-files .info-file[data-visibility='false']
+{
+    display: none;
+}
 .main__all-files .info-file .link-commit
 {
     text-decoration: none;

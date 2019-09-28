@@ -3,7 +3,7 @@ const SEARCH_FILE = {
     nameFile: ''
 }
 
-function searchFile(name){
+module.exports =  function searchFile(name){
     return{
         type: 'SEARCH_FILE',
         nameFile: name
