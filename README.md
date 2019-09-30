@@ -1,5 +1,5 @@
-<h2>Переход к другому заданию:</h2>
+<h2>Проект Arcanum</h2>
 
-Верстка - ```git checkout responsive_layout```  <br>
+Задание по адаптивной верстке - https://github.com/dogunok/SHRI-project-2019/tree/responsive_layout  <br>
 
-Redux Data Flow - ```git checkout redux_data_flow```  <br>
+Redux Data Flow - https://github.com/dogunok/SHRI-project-2019/tree/redux_data_flow  <br>
