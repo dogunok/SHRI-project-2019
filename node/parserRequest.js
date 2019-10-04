@@ -3,17 +3,20 @@ const { execFile} = require('child_process');
 
 module.exports = class ParserRequest{
     constructor(path){
-        this.path = path
-        this.allComits
+        this.path = path;
+        this.allComits = '';
     }
 
     
 
     getAllRepos(req, res) {
-        fs.readdir('./' + this.path , (err, files) => {
+        fs.readdir('./../' + this.path , (err, files) => {
             if(err) return res.send(err)
+            
             const allRepos = files.filter(item => item[0] !== '.');
+            // console.log('test')
             res.send(allRepos);
+            // console.log(allRepos)
         });
     }
 
@@ -23,6 +26,7 @@ module.exports = class ParserRequest{
         ['log', '--pretty=format:{"commitHash":"%H", "date": "%ad", "nameCommit": "%s"};'],
         {cwd: `./${this.path}/${params.repositoryId}`},
         (err, out) => {
+            console.log(out)
             if(err) return res.send(err)
             const infoCommit = [];
 
@@ -37,6 +41,7 @@ module.exports = class ParserRequest{
             })
             this.allComits = infoCommit
             res.send(infoCommit)
+            console.log(infoCommit)
         })
     }
 

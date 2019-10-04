@@ -5,12 +5,12 @@ const newRequest = new ParserRequest(pathStart)
 
 
 const router = app => {
-
     app.get(`/${pathStart}`, (req, res) => {
         newRequest.getAllRepos(req, res)
     });
 
     app.get(`/${pathStart}/:repositoryId/commits/:commitHash`, (req, res) => {
+        console.log('второй путь')
         newRequest.getAllCommits(req, res)
     })
 
@@ -43,3 +43,4 @@ const router = app => {
     });
 }
 module.exports = router;
+
