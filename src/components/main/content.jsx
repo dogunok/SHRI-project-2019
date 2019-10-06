@@ -5,6 +5,7 @@ import CommitList from './CommitList';
 import ContentList from './ContentList';
 import BreadCrumb from './BreadСrumb';
 
+import './Content.scss';
 import toggleIcon from '../../picture/toggleIcon.svg'
 
 export default class Content extends React.Component {
@@ -14,19 +15,19 @@ export default class Content extends React.Component {
         this.state = {
             error: null,
             isLoaded: false,
-            items: [],
-            location: window.location.pathname === '/' ? '/react' : window.location.pathname
+            allRepo: [],
           };
     }
 
-    componentDidMount() {
-        fetch(`http://localhost:3003/api/repos${this.state.location}/tree/master`)
+    _getAllFiles(nameRepo, newPath){
+        fetch(`http://localhost:3003/api/repos${nameRepo}/tree/master`)
         .then(res => res.json())
         .then(
             (result) => {
                 this.setState({
+                    allRepo: result,
                     isLoaded: true,
-                    items: result
+                    location: newPath
                 });
             },
             (error) => {
@@ -37,27 +38,21 @@ export default class Content extends React.Component {
         )
     }
 
+    componentDidMount() {
+        this._getAllFiles(window.location.pathname === '/' ? '/react' : window.location.pathname, 
+            window.location.pathname === '/' ? '/react' : window.location.pathname
+        )
+    }
+
     componentDidUpdate(prevProps){
 
         if(prevProps.history.location.pathname !== prevProps.location.pathname){
             this.setState({
                 isLoaded: false,
-                location: prevProps.history.location.pathname
             });
-            fetch(`http://localhost:3003/api/repos${this.state.location}/tree/master`)
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    this.setState({
-                        isLoaded: true,
-                        items: result
-                    });
-                },
-                (error) => {
-                    this.setState({
-                        error: error
-                    });
-                }
+
+            this._getAllFiles(prevProps.history.location.pathname,
+                prevProps.history.location.pathname
             )
         }
     }
@@ -70,11 +65,11 @@ export default class Content extends React.Component {
         } else {
             return(
                 <div className="main">
-                    <BreadCrumb/>
+                    <BreadCrumb path={this.state.location}/>
                     <div className="main__info-commit">
                         <div className="main__commit-name">
-                            <span>arcadia</span>
-                            <div className="selected-commit">trunk
+                            <span>{this.state.location.split('/')[1]}</span>
+                            <div className="selected-commit"> master
                                 <svg className="header__toggle-icon" aria-hidden="true" width="12" height="9">
                                     <path className="header__toggle-icon_arrow" d="M6 7.5L.56 2.08l.88-.89L6 5.74l4.56-4.56.88.89z"></path>
                                 </svg>
@@ -90,7 +85,7 @@ export default class Content extends React.Component {
                             <Link to="files" className="main__navigation_item main__navigation_item-active">FILES</Link>
                             <Link to="branches" className="main__navigation_item">BRANCHES</Link>
                         </nav>
-                        <ContentList info={this.state.items}/>
+                        <ContentList info={this.state.allRepo}/>
                         <div className="main__all-files main__all-files-mobile">
     
                         </div>

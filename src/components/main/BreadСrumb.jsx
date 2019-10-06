@@ -1,10 +1,10 @@
 import React from 'react';
 
-export default function BreadCrumb(){
+export default function BreadCrumb(props){
     return(
         <div className="main__repo-path">
             <span>
-                    arcadia
+                {props.path.split('/').join(' / ')}
             </span>
         </div>
     )

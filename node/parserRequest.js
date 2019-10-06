@@ -74,7 +74,7 @@ module.exports = class ParserRequest{
             })
 
             execFile('git' ,
-            [`log`, `--name-only`, `--pretty=format:"%h:%an:%ar:%s"`, `${this._checkArg(params.commitHash, 'master')}`],
+            [`log`, `--name-only`, `--pretty=format:%h:%an:%ar:%s`, `${this._checkArg(params.commitHash, 'master')}`],
             {cwd: `./../${this.path}/${this._checkArg(params.repositoryId, '')}${this._checkArg(params['3'], '')}`, maxBuffer: 100000000},
             (err, out) => {
                 if(err) return res.send(err)

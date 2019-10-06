@@ -1,0 +1,33 @@
+$borderColor: #F0F2F3;
+$mainBorderColor: #E5E5E5;
+$selectedElem: #FF4F49;
+$firstSimbol: #FF3029;
+$greyColor: #7F8285;
+$lowGreyColor: #B8BEC3;
+$blueColor: #1774E9;
+$activeCommit: #4F4F4F;
+$nameListCommit: #434445;
+$indentAroundBody: 32px;
+$borderSizeActiveElem: 3px;
+
+.footer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding:18px 20px 14px;
+    border-top: 1px solid $borderColor;
+    font-size: 13px;
+    line-height: 18px;
+    color: $greyColor;
+    .date{
+        display: flex;
+        flex-direction: row;
+        a{
+            text-decoration: none;
+            color: $blueColor;
+        }
+        .years{
+            margin-left: 32px;
+        }
+    }
+}

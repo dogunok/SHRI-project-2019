@@ -2,6 +2,7 @@ import React from 'react';
 import Listrepo from './ListRepo.jsx';
 import logotype from '../../picture/logo.svg';
 // import toggleIcon from '../../picture/toggleIcon.svg';
+import './Header.scss';
 
 export default class HeaderWrapper extends React.Component {
     constructor(props) {
@@ -9,12 +10,22 @@ export default class HeaderWrapper extends React.Component {
         this.state = {
             allRepo: [],
             isLoaded: false,
-            error: null
+            error: null,
+            nameRepo: window.location.pathname === '/' ? 'react' : window.location.pathname.split('/')[1]
         }
     }
 
     componentDidMount() {
         this._getAllRepo();
+    }
+
+    componentDidUpdate(prevProps){
+        console.log(prevProps)
+        if(prevProps.history.location.pathname !== prevProps.location.pathname){
+            this.setState({
+                nameRepo: prevProps.history.location.pathname.split('/')[1]
+            })
+        }
     }
 
     render() {
@@ -29,7 +40,7 @@ export default class HeaderWrapper extends React.Component {
                     </a>
                     <div className="header__repo">
                         <span className="header__repo-text">
-                                Repository <span className="header__repo-name">Arc</span>
+                                Repository <span className="header__repo-name">{this.state.nameRepo}</span>
                         </span>
                         <Listrepo
                             list={['Loading']}
@@ -41,7 +52,7 @@ export default class HeaderWrapper extends React.Component {
                 </header>
             )
         } else {
-
+            console.log(window.location.pathname)
         return(
                 <header className="header">
                     <a className="header__logo" href="#">
@@ -51,7 +62,7 @@ export default class HeaderWrapper extends React.Component {
                         this._getAllRepo.bind(this)
                     }>
                         <span className="header__repo-text">
-                                Repository <span className="header__repo-name">Arc</span>
+                                Repository <span className="header__repo-name">{this.state.nameRepo}</span>
                         </span>
                         <Listrepo
                             list={this.state.allRepo}

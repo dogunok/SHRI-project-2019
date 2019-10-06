@@ -1,0 +1,101 @@
+$borderColor: #F0F2F3;
+$mainBorderColor: #E5E5E5;
+$selectedElem: #FF4F49;
+$firstSimbol: #FF3029;
+$greyColor: #7F8285;
+$lowGreyColor: #B8BEC3;
+$blueColor: #1774E9;
+$activeCommit: #4F4F4F;
+$nameListCommit: #434445;
+$indentAroundBody: 32px;
+$heightHeader: 55px;
+$borderSizeActiveElem: 3px;
+
+.header{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    height: $heightHeader;
+    padding-left: $indentAroundBody;
+    border-bottom: 1px solid $borderColor;
+
+    &__repo{
+        margin-left: 40px;
+        cursor: pointer;
+        position: relative;
+        &-text{
+            position: relative;
+            display: inline;
+            font-size: 14px;
+            line-height: 18px;
+            font-weight: 110;
+            padding-bottom: ($heightHeader / 2) - ($borderSizeActiveElem * 3);
+            &::after{
+                content: '';
+                width: 100%;
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                border-bottom: $borderSizeActiveElem solid $selectedElem;
+                pointer-events: none;
+            }
+        }
+
+
+
+        &_list{
+            height: 124px;
+            width: 266px;
+            position: absolute;
+            box-sizing: border-box;
+            display: none;
+            padding:14px 0 18px 22px;
+            overflow: scroll;
+            box-shadow: 0px 4px 16px rgba(53, 73, 93, 0.2);
+            background-color: #fff;
+            z-index: 9;
+            cursor: default;
+
+            
+            &-name{
+                font-size: 14px;
+                line-height: 20px;
+                list-style: none;
+                overflow: scroll;
+                margin-top: 16px;
+                
+                &:first-child{
+                    margin-top: 0;
+                }
+
+                a{
+                    text-decoration: none;
+                    color: #000;
+                    display: inline-block;
+                    width: 100%;
+                }
+
+                &:hover{
+                    a{
+                        color: $blueColor;
+                    }
+                }
+            }
+        }
+        &:hover{
+            .header__toggle-icon{
+               transform: rotate(180deg);
+            }
+
+           .header__repo_list{
+               display: block;
+
+           }
+       }
+    }
+
+    &__toggle-icon{
+        margin-left: 6px;
+    }
+}
