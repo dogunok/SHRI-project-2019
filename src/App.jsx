@@ -1,7 +1,7 @@
 import React from 'react';
-import Header from './components/header/header.jsx';
-import Content from './components/main/content.jsx';
-import Footer from './components/footer/footer.jsx'
+import Header from './components/header/Header.jsx';
+import Content from './components/main/Content.jsx';
+import Footer from './components/footer/Footer.jsx'
 import './App.scss';
 
 export default class App extends React.Component{
@@ -10,33 +10,18 @@ export default class App extends React.Component{
         this.state = {
           error: null,
           isLoaded: false,
-          items: [],
-          items2: [],
+          items: []
         };
       }
-    
-    componentDidMount() {
-        const fetchOne = fetch("http://localhost:3003/api/repos")
-        .then(res => res.json())
-        .then(
-            (result) => {
-                this.setState({
-                items: result
-                });
-            },
-            (error) => {
-                this.setState({
-                error: error
-                });
-            }
-        )
 
-        const fetchTwo =         fetch("http://localhost:3003/api/repos/server-and-API/commits/902f830c7")
+    componentDidMount() {
+        fetch("http://localhost:3003/api/repos/react/tree/master")
         .then(res => res.json())
         .then(
             (result) => {
                 this.setState({
-                items2: result
+                    isLoaded: true,
+                    items: result
                 });
             },
             (error) => {
@@ -45,18 +30,10 @@ export default class App extends React.Component{
                 });
             }
         )
-
-        Promise.all([fetchOne, fetchTwo]).then(result => {
-            this.setState({
-                isLoaded: true,
-            });
-        })
-
     }
 
     render() {
-        //   if(this.state.isLoaded){
-        const { error, isLoaded, items } = this.state;
+        const { error, isLoaded} = this.state;
         if (error) {
             return <div>Ошибка: {error.message}</div>;
         } else if (!isLoaded) {
@@ -64,16 +41,13 @@ export default class App extends React.Component{
         } else {
             return(
                 <>
-                    <Header
-                        info={items}
+                    <Header/>
+                    <Content 
+                        infoContent={this.state.items}
                     />
-                    <Content />
                     <Footer/>
                 </>
             )
         }
     }
 }
-
-
-// export default App;

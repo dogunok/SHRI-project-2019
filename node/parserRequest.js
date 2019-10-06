@@ -59,16 +59,35 @@ module.exports = class ParserRequest{
 
     getAllFilesInFolder(req, res){
         const params = req.params;
+
+        const allInfo = {
+            fileName: [],
+            log: []
+        };
         if(params['0'].match('tree') || params['2'] === undefined){
             execFile('git' ,
             [`ls-tree`, `-r`, `--name-only`, `${this._checkArg(params.commitHash, 'master')}`],
-            {cwd: `./${this.path}/${this._checkArg(params.repositoryId, '')}${this._checkArg(params['3'], '')}`},
+            {cwd: `./../${this.path}/${this._checkArg(params.repositoryId, '')}${this._checkArg(params['3'], '')}`, maxBuffer: 100000000},
             (err, out) => {
-                const allName = {};
                 if(err) return res.send(err)
-                out.trim().split('\n').map((item, i) => allName["name-" + i] = "" + item);
-                res.send(allName);
+                out.trim().split('\n').map((item, i) => allInfo.fileName.push(item));
             })
+
+            execFile('git' ,
+            [`log`, `--name-only`, `--pretty=format:"%h:%an:%ar:%s"`, `${this._checkArg(params.commitHash, 'master')}`],
+            {cwd: `./../${this.path}/${this._checkArg(params.repositoryId, '')}${this._checkArg(params['3'], '')}`, maxBuffer: 100000000},
+            (err, out) => {
+                if(err) return res.send(err)
+                out.trim().split('\n').map((item, i) => allInfo.log.push(item));
+            })
+
+            const checkInfo = setInterval(() => {
+                if(allInfo.fileName.length > 0 && allInfo.log.length > 0){
+                    clearInterval(checkInfo)
+                    res.send(allInfo);
+                }
+            }, 100)
+
         } else if(params['2'] !== undefined){
             res.status(404).send('Sorry cant find that!');
         }

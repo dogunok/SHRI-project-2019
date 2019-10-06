@@ -10,7 +10,6 @@ const router = app => {
     });
 
     app.get(`/${pathStart}/:repositoryId/commits/:commitHash`, (req, res) => {
-        console.log('второй путь')
         newRequest.getAllCommits(req, res)
     })
 

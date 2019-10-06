@@ -271,7 +271,7 @@ $borderSizeActiveElem: 3px;
     &__all-files{
         margin-left: $indentAroundBody;
         margin-right:$indentAroundBody;
-
+        padding-left: 0;
         // &-mobile{
         //     display: none;
         // }
@@ -306,39 +306,34 @@ $borderSizeActiveElem: 3px;
             padding-left: 0;
             padding-bottom: 8px;
             border-bottom: 1px solid $borderColor;
+            font-size: 14px;
+            line-height: 20px;
+            padding-top: 10px;
 
-            .link-commit{
-                text-decoration: none;
-            }
-            li{
-                font-size: 14px;
-                line-height: 20px;
-                list-style: none;
-                &:first-child{
-                    margin-left: 8px;
-                }
-
-                &:last-child{
-                    margin-right: 8px;
-                    text-align: right;
-                }
-                
-            }
-            .name-file{
-                .picture{
+            &__type{
+                margin-left: 8px;
+                &-picture{
                     display: inline-block;
                     padding-right: 8px
                 }
-                
+
             }
-            .hash-commit{
+            &__hash-commit{
                 color: $blueColor;
+                &-link{
+                    text-decoration: none;
+                }
             }
 
-            .commiter{
+            &__commiter{
                 &::first-letter{
                     color: $firstSimbol;
                 }
+            }
+
+            &__date{
+                margin-right: 8px;
+                text-align: right;
             }
             &:last-child{
                 border-bottom: 0px;
@@ -369,8 +364,7 @@ $borderSizeActiveElem: 3px;
     }
 }
 
-.main__all-files-mobile
-{
+.main__all-files-mobile{
     display: none;
 }
 
