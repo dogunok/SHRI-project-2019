@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function ListRepo(props){
     return(
@@ -6,9 +7,9 @@ export default function ListRepo(props){
             {
                 props.list.map((item, index) => (
                     <li className="header__repo_list-name" key={index}>
-                        <a href={`${item}/`}>
+                        <Link to={`${item}`}>
                             {item}
-                        </a>
+                        </Link>
                     </li>
                 ))
             }
