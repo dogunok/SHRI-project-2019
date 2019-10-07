@@ -39,17 +39,17 @@ export default function ContentListItem(props){
     }
 
     function splitInformation(){
-        addFileNameinObject()
+        addFileNameinObject();
 
         let intermediateValue = {
             changedFile : []
         };
-        const finishValue = []
+        const finishValue = [];
         const infoFile = props.info.log;
 
         infoFile.forEach((info, index) => {
             if(info.length === 0){
-                finishValue.push(intermediateValue)
+                finishValue.push(intermediateValue);
                 intermediateValue = {
                     changedFile : []
                 };
@@ -74,15 +74,11 @@ export default function ContentListItem(props){
 
     function choiceIcon(namefile){
         const allInfoFile = props.info.fileName;
-        
+
         for(let i = 0; i < allInfoFile.length; i++){
-            // console.log(allInfoFile[i])
-            if(allInfoFile[i].match(namefile) 
-            && allInfoFile[i].match('/') 
-            && !allInfoFile[i].match('.md') 
+            if(allInfoFile[i].match(namefile)
+            && allInfoFile[i].match('/')
             && !allInfoFile[i].split('/')[allInfoFile[i].split('/').length - 1].match(namefile)){
-                console.log(allInfoFile[i])
-                console.log(namefile)
                 return iconFolder;
             }else if(allInfoFile[i].match(namefile)){
                 return iconFile;
@@ -103,7 +99,6 @@ export default function ContentListItem(props){
                                 <Link to={`${window.location.pathname}/${item.name}`}>
                                     {item.name}
                                 </Link>
-                                
                             </span>
                         </div>
                         <div className="info-file__hash-commit">

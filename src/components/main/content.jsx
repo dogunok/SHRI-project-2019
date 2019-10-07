@@ -6,6 +6,7 @@ import ContentList from './ContentList';
 import BreadCrumb from './BreadСrumb';
 
 import './Content.scss';
+// import loadingGif from '../../picture/loadingGif.gif'
 import toggleIcon from '../../picture/toggleIcon.svg'
 
 export default class Content extends React.Component {
@@ -21,10 +22,7 @@ export default class Content extends React.Component {
 
     _getAllFiles(nameRepo, newPath){
         const repoPath = nameRepo.split('/');
-        repoPath.splice(0, 2)
-        // console.log(nameRepo)
-        // console.log(repoPath)
-        // console.log(`http://localhost:3003/api/repos/${nameRepo.split('/')[1]}/tree/master/${repoPath.join('/')}`)
+        repoPath.splice(0, 2);
         fetch(`http://localhost:3003/api/repos/${nameRepo.split('/')[1]}/tree/master/${repoPath.join('/')}`)
         .then(res => res.json())
         .then(
@@ -66,7 +64,18 @@ export default class Content extends React.Component {
         if(this.state.error){
             return this.state.error
         } else if(!this.state.isLoaded) { 
-            return <div>загрузка</div>
+            return (
+                <div id="fountainTextG">
+                    <div id="fountainTextG_1" className="fountainTextG">З</div>
+                    <div id="fountainTextG_2" className="fountainTextG">а</div>
+                    <div id="fountainTextG_3" className="fountainTextG">г</div>
+                    <div id="fountainTextG_4" className="fountainTextG">р</div>
+                    <div id="fountainTextG_5" className="fountainTextG">у</div>
+                    <div id="fountainTextG_6" className="fountainTextG">з</div>
+                    <div id="fountainTextG_7" className="fountainTextG">к</div>
+                    <div id="fountainTextG_8" className="fountainTextG">а</div>
+                </div>
+            )
         } else {
             return(
                 <div className="main">

@@ -51,7 +51,6 @@ export default class HeaderWrapper extends React.Component {
                 </header>
             )
         } else {
-            console.log(this.state.allRepo)
             return(
                 <header className="header">
                     <a className="header__logo" href="#">
