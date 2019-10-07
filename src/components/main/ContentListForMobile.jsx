@@ -108,15 +108,18 @@ export default function ContentListItem(props){
                         <div className="info-file__date">
                             {item.log.date}
                         </div>
-                        <div className="info-file__commiter commiter">
-                            {/* <div className="info-file__hash-commit"> */}
-                                <a className="info-file__hash-commit-link" href="#">
-                                {item.log.hash}
-                                </a>
-                            {/* </div> */}
-                            {/* {item.log.hash} */}
-                            {item.log.autor}
+
+                        <div>
+                            <a className="info-file__hash-commit-link" href="#">
+                                    {item.log.hash}
+                            </a>
+
+                            <div className="info-file__commiter commiter">
+
+                                {item.log.autor}
+                            </div>
                         </div>
+
                     </li>
                 ))
             }
