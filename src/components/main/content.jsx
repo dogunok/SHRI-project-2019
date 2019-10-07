@@ -6,8 +6,6 @@ import ContentList from './ContentList';
 import BreadCrumb from './BreadСrumb';
 
 import './Content.scss';
-// import loadingGif from '../../picture/loadingGif.gif'
-import toggleIcon from '../../picture/toggleIcon.svg'
 
 export default class Content extends React.Component {
     constructor(props){

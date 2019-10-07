@@ -43,19 +43,20 @@ $borderSizeActiveElem: 3px;
         margin:12px $indentAroundBody 0px $indentAroundBody;
         font-size: 24px;
         line-height: 28px;
-        
 
         .selected-commit{
             display: inline-block;
             position: relative;
             padding-bottom: 10px;
             color: $greyColor;
+
             &:hover{
                 cursor: pointer;
+
                 .main__toggle-icon{
                     transform: rotate(180deg);
-
                 }
+
                 .commit__list{
                     display: block;
                 }
@@ -88,7 +89,6 @@ $borderSizeActiveElem: 3px;
 
                         .commit__list_item-name{
                             color: #F2F2F2;
-                            
                         }
 
                         .commit__list_item-date-change{
@@ -107,6 +107,7 @@ $borderSizeActiveElem: 3px;
                     &:nth-child(2){
                         padding-top: 14px;
                         position: relative;
+
                         &::before{
                             content: '';
                             position: absolute;
@@ -120,8 +121,6 @@ $borderSizeActiveElem: 3px;
                         background-color: #F4F5F6;
                     }
                 }
-
-
             }
         }
 
@@ -136,6 +135,7 @@ $borderSizeActiveElem: 3px;
         margin-bottom: 19px;
         font-size: 14px;
         line-height: 20px;
+
         &_hash{
             color: $blueColor;
         }
@@ -143,8 +143,10 @@ $borderSizeActiveElem: 3px;
         &_date{
             color: $blueColor;
         }
+
         .autor-commit{
             display: inline-block;
+
             &::first-letter{
                 color: $firstSimbol;
             }
@@ -156,15 +158,19 @@ $borderSizeActiveElem: 3px;
         margin-right:$indentAroundBody;
         padding-bottom: 10px;
         border-bottom: 1px solid $borderColor;
+
         &_item{
+
             &:first-child{
                 margin-left: 0;
             }
+
             margin-left: 32px;
             color: $greyColor;
             text-decoration: none;
             font-size: 16px;
             line-height: 20px;
+
             &-active{
                 position: relative;
                 color: black;
@@ -186,12 +192,11 @@ $borderSizeActiveElem: 3px;
         margin-left: $indentAroundBody;
         margin-right:$indentAroundBody;
         padding-left: 0;
-        // &-mobile{
-        //     display: none;
-        // }
+
         li{
             list-style: none;
         }
+
         .name-columns{
             display: grid;
             grid-template-columns: 1fr 1fr 2fr 1fr 1fr;
@@ -199,12 +204,12 @@ $borderSizeActiveElem: 3px;
             padding-left: 0;
             padding-bottom: 8px;
             border-bottom: 1px solid $borderColor;
+
             li{
                 color: $lowGreyColor;
                 font-size: 14px;
                 line-height: 20px;
-                // list-style: none;
-                // text-align: left;
+
                 &:first-child{
                     margin-left: 8px;
                 }
@@ -234,6 +239,7 @@ $borderSizeActiveElem: 3px;
                     padding-right: 8px
                 }
             }
+
             &__hash-commit{
                 color: $blueColor;
                 &-link{
@@ -251,6 +257,7 @@ $borderSizeActiveElem: 3px;
                 margin-right: 8px;
                 text-align: right;
             }
+
             &:last-child{
                 border-bottom: 0px;
             }
@@ -268,11 +275,11 @@ $borderSizeActiveElem: 3px;
     {
         display: none;
     }
-    .main__all-files-mobile
-    {
+    .main__all-files-mobile{
         display: block;
     }
-    .main__all-files-mobile .info-file
+    .main__all-files-mobile 
+    .info-file
     {
         position: relative;
         display: grid;

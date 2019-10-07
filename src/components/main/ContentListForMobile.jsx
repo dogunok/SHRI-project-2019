@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 import iconFolder from '../../picture/iconFolder.svg';
 import iconInstruction from '../../picture/iconInstruction.svg';
 import iconFile from '../../picture/iconFile.svg';
@@ -6,6 +8,7 @@ import iconFile from '../../picture/iconFile.svg';
 export default function ContentListItem(props){
     const allInfoFile = {};
     const allInfoFileInArr = [];
+
     function addFileNameinObject(){
         const fileName = props.info.fileName;
         fileName.forEach(name => {
@@ -25,8 +28,8 @@ export default function ContentListItem(props){
 
         keysInfoFile.forEach(key => {
             splitInformation.map(infoLog => {
-                if(!allInfoFile[key].changed  && infoLog.changedFile.length > 0 && infoLog.changedFile.includes(key)){
-                    allInfoFile[key] = infoLog;
+                if(!allInfoFile[key].changed  && infoLog.changedFile.length > 0 && infoLog.changedFile.join('').match(key)){
+                    allInfoFile[key].log = infoLog;
                     allInfoFile[key].changed = true;
                     allInfoFile[key].name = key;
                     allInfoFileInArr.push(allInfoFile[key]);
@@ -36,15 +39,17 @@ export default function ContentListItem(props){
     }
 
     function splitInformation(){
-        addFileNameinObject()
+        addFileNameinObject();
+
         let intermediateValue = {
             changedFile : []
         };
-        const finishValue = []
+        const finishValue = [];
         const infoFile = props.info.log;
+
         infoFile.forEach((info, index) => {
             if(info.length === 0){
-                finishValue.push(intermediateValue)
+                finishValue.push(intermediateValue);
                 intermediateValue = {
                     changedFile : []
                 };
@@ -55,7 +60,7 @@ export default function ContentListItem(props){
                 intermediateValue.date = brokenString[2];
                 intermediateValue.message = brokenString[3];
             } else {
-                intermediateValue.changedFile.push(info.split('/')[0])
+                intermediateValue.changedFile.push(info);
                 if(infoFile.length - 1 === index){
                     finishValue.push(intermediateValue);
                     intermediateValue = {};
@@ -68,12 +73,16 @@ export default function ContentListItem(props){
     addInfoCommit(splitInformation);
 
     function choiceIcon(namefile){
-        if(namefile.match('.md')){
-            return iconInstruction;
-        } else if(namefile.match(/\./)){
-            return iconFile;
-        } else {
-            return iconFolder;
+        const allInfoFile = props.info.fileName;
+
+        for(let i = 0; i < allInfoFile.length; i++){
+            if(allInfoFile[i].match(namefile)
+            && allInfoFile[i].match('/')
+            && !allInfoFile[i].split('/')[allInfoFile[i].split('/').length - 1].match(namefile)){
+                return iconFolder;
+            }else if(allInfoFile[i].match(namefile)){
+                return iconFile;
+            }
         }
     }
     return(
@@ -86,36 +95,28 @@ export default function ContentListItem(props){
                                 choiceIcon(item.name)
                             }/>
                             <span className="info-file__name">
-                                {item.name}
+                                <Link to={`${window.location.pathname}/${item.name}`}>
+                                    {item.name}
+                                </Link>
                             </span>
                         </div>
-                        <div className="info-file__hash-commit">
-                            <a className="info-file__hash-commit-link" href="#">
-                                {item.hash}
-                            </a>
-                        </div>
+
                         <div className="info-file__commit-message">
-                            {item.message}
+                            {item.log.message}
+                        </div>
+
+                        <div className="info-file__date">
+                            {item.log.date}
                         </div>
                         <div className="info-file__commiter commiter">
-                            {item.autor}
+                            {/* <div className="info-file__hash-commit"> */}
+                                <a className="info-file__hash-commit-link" href="#">
+                                {item.log.hash}
+                                </a>
+                            {/* </div> */}
+                            {/* {item.log.hash} */}
+                            {item.log.autor}
                         </div>
-                        <div className="info-file__date">
-                            {item.date}
-                        </div>
-                        <ul className="info-file">
-                                <li className="name-file name-file-folder">
-                                    <div className="picture picture-folder">
-                                            <svg width="12" height="9" viewBox="0 0 12 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M10.875 1.5H6.375L4.875 0H1.125C0.492188 0 0 0.515625 0 1.125V7.875C0 8.50781 0.492188 9 1.125 9H10.875C11.4844 9 12 8.50781 12 7.875V2.625C12 2.01562 11.4844 1.5 10.875 1.5Z" fill="black"/>
-                                            </svg>
-                                    </div>
-                                    api
-                                </li>
-                                <li><span>ARCADIA-771:</span> convert string to json object</li>
-                                <li className="commiter"> <a className="link-commit" href="#">d53dsv</a> 
-                                    by Alexey Besedin, 4 s ago</li>
-                        </ul>
                     </li>
                 ))
             }
