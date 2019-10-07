@@ -22,6 +22,7 @@ const router = app => {
     })
 
     app.get(`/${pathStart}/:repositoryId*(/tree/:commitHash)?(/:path*)?`, (req, res) => {
+        console.log('нужный путь')
         newRequest.getAllFilesInFolder(req, res)
     })
 

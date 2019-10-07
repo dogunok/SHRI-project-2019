@@ -12,11 +12,8 @@ module.exports = class ParserRequest{
     getAllRepos(req, res) {
         fs.readdir('./../' + this.path , (err, files) => {
             if(err) return res.send(err)
-            
             const allRepos = files.filter(item => item[0] !== '.');
-            // console.log('test')
             res.send(allRepos);
-            // console.log(allRepos)
         });
     }
 
@@ -26,7 +23,6 @@ module.exports = class ParserRequest{
         ['log', '--pretty=format:{"commitHash":"%H", "date": "%ad", "nameCommit": "%s"};'],
         {cwd: `./${this.path}/${params.repositoryId}`},
         (err, out) => {
-            console.log(out)
             if(err) return res.send(err)
             const infoCommit = [];
 
@@ -41,7 +37,6 @@ module.exports = class ParserRequest{
             })
             this.allComits = infoCommit
             res.send(infoCommit)
-            console.log(infoCommit)
         })
     }
 
@@ -69,6 +64,7 @@ module.exports = class ParserRequest{
             [`ls-tree`, `-r`, `--name-only`, `${this._checkArg(params.commitHash, 'master')}`],
             {cwd: `./../${this.path}/${this._checkArg(params.repositoryId, '')}${this._checkArg(params['3'], '')}`, maxBuffer: 100000000},
             (err, out) => {
+                
                 if(err) return res.send(err)
                 out.trim().split('\n').map((item, i) => allInfo.fileName.push(item));
             })
@@ -97,7 +93,7 @@ module.exports = class ParserRequest{
         const params = req.params;
         execFile('git' ,
         ['show', `${params.commitHash}:${params.pathToFile}${params['0']}`],
-        {cwd: `./${this.path}/${params.repositoryId}`,
+        {cwd: `./../${this.path}/${params.repositoryId}`,
         maxBuffer: 1000000}, (err, out) => {
             if(err) return res.send(err)
             res.send(out)

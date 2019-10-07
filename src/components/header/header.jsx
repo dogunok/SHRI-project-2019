@@ -20,7 +20,6 @@ export default class HeaderWrapper extends React.Component {
     }
 
     componentDidUpdate(prevProps){
-        console.log(prevProps)
         if(prevProps.history.location.pathname !== prevProps.location.pathname){
             this.setState({
                 nameRepo: prevProps.history.location.pathname.split('/')[1]
@@ -52,8 +51,8 @@ export default class HeaderWrapper extends React.Component {
                 </header>
             )
         } else {
-            console.log(window.location.pathname)
-        return(
+            console.log(this.state.allRepo)
+            return(
                 <header className="header">
                     <a className="header__logo" href="#">
                         <img src={logotype} alt="logotype"/>

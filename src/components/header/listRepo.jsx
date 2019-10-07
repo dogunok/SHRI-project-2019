@@ -7,7 +7,7 @@ export default function ListRepo(props){
             {
                 props.list.map((item, index) => (
                     <li className="header__repo_list-name" key={index}>
-                        <Link to={`${item}`}>
+                        <Link to={`/${item}`}>
                             {item}
                         </Link>
                     </li>

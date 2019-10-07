@@ -21,6 +21,7 @@ export default class App extends React.Component{
                 <Switch>
                     <Route path='/' component={Content}/>
                     <Route path='/:repositoryId' component={Content}/>
+                    <Route path='/:repositoryId/:path' component={Content}/>
                 </Switch>
                 <Footer/>
             </>

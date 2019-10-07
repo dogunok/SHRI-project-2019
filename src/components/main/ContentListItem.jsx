@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 import iconFolder from '../../picture/iconFolder.svg';
 import iconInstruction from '../../picture/iconInstruction.svg';
 import iconFile from '../../picture/iconFile.svg';
@@ -23,11 +25,10 @@ export default function ContentListItem(props){
     function addInfoCommit(fn){
         const splitInformation = fn();
         const keysInfoFile = Object.keys(allInfoFile);
-        // console.log(splitInformation)
-        // console.log(keysInfoFile)
+
         keysInfoFile.forEach(key => {
             splitInformation.map(infoLog => {
-                if(!allInfoFile[key].changed  && infoLog.changedFile.length > 0 && infoLog.changedFile.includes(key)){
+                if(!allInfoFile[key].changed  && infoLog.changedFile.length > 0 && infoLog.changedFile.join('').match(key)){
                     allInfoFile[key].log = infoLog;
                     allInfoFile[key].changed = true;
                     allInfoFile[key].name = key;
@@ -59,7 +60,7 @@ export default function ContentListItem(props){
                 intermediateValue.date = brokenString[2];
                 intermediateValue.message = brokenString[3];
             } else {
-                intermediateValue.changedFile.push(info.split('/')[0])
+                intermediateValue.changedFile.push(info);
                 if(infoFile.length - 1 === index){
                     finishValue.push(intermediateValue);
                     intermediateValue = {};
@@ -72,14 +73,23 @@ export default function ContentListItem(props){
     addInfoCommit(splitInformation);
 
     function choiceIcon(namefile){
-        if(namefile.match('.md')){
-            return iconInstruction;
-        } else if(namefile.match(/\./)){
-            return iconFile;
-        } else {
-            return iconFolder;
+        const allInfoFile = props.info.fileName;
+        
+        for(let i = 0; i < allInfoFile.length; i++){
+            // console.log(allInfoFile[i])
+            if(allInfoFile[i].match(namefile) 
+            && allInfoFile[i].match('/') 
+            && !allInfoFile[i].match('.md') 
+            && !allInfoFile[i].split('/')[allInfoFile[i].split('/').length - 1].match(namefile)){
+                console.log(allInfoFile[i])
+                console.log(namefile)
+                return iconFolder;
+            }else if(allInfoFile[i].match(namefile)){
+                return iconFile;
+            }
         }
     }
+
     return(
         <>
             {
@@ -90,7 +100,10 @@ export default function ContentListItem(props){
                                 choiceIcon(item.name)
                             }/>
                             <span className="info-file__name">
-                                {item.name}
+                                <Link to={`${window.location.pathname}/${item.name}`}>
+                                    {item.name}
+                                </Link>
+                                
                             </span>
                         </div>
                         <div className="info-file__hash-commit">
