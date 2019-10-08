@@ -135,7 +135,7 @@ describe('Статическое тестирование', () => {
                     assert.ok(exists, '.footer не появился');
             })
         })
-    
+
         it('На странице http://localhost:3000/react/scripts присутствует блок .header__repo_list ', function() {
             return this.browser
                 .url('http://localhost:3000/react/scripts')
@@ -154,6 +154,7 @@ describe('Динамичечское тестирование', () => {
                 .url('http://localhost:3000/interactiveMap')
                 .waitForVisible('.info-file__name a')
                 .$('.info-file__name a').click()
+                .waitForVisible('.info-file__name a')
                 .then((exists) => {
                     assert.ok(exists, 'содержимое отсутствует и клик не произошел');
             })
@@ -164,6 +165,7 @@ describe('Динамичечское тестирование', () => {
                 .url('http://localhost:3000/interactiveMap/css')
                 .waitForVisible('.info-file__name a')
                 .$('.info-file__name a').click()
+                .waitForVisible('.info-file__name a')
                 .then((exists) => {
                     assert.ok(exists, 'содержимое отсутствует и клик не произошел');
             })
