@@ -1,5 +1,5 @@
 import React from 'react';
-import CommitListItem from './CommitListItem';
+import CommitListItem from './CommitListItem.jsx';
 
 export default function CommitList(props){
     return(

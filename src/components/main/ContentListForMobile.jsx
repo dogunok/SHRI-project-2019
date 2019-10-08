@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import iconFolder from '../../picture/iconFolder.svg';
-import iconInstruction from '../../picture/iconInstruction.svg';
 import iconFile from '../../picture/iconFile.svg';
 
 export default function ContentListItem(props){

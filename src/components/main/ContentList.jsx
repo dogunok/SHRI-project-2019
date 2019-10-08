@@ -1,6 +1,6 @@
 import React from 'react';
-import ContentListItem from './ContentListItem';
-import ContentListForMobile from './ContentListForMobile'
+import ContentListItem from './ContentListItem.jsx';
+import ContentListForMobile from './ContentListForMobile.jsx'
 
 export default function ContentList(props){
     return (

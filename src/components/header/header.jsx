@@ -1,7 +1,6 @@
 import React from 'react';
 import Listrepo from './ListRepo.jsx';
 import logotype from '../../picture/logo.svg';
-// import toggleIcon from '../../picture/toggleIcon.svg';
 import './Header.scss';
 
 export default class HeaderWrapper extends React.Component {

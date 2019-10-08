@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 
-import CommitList from './CommitList';
-import ContentList from './ContentList';
-import BreadCrumb from './BreadСrumb';
+import CommitList from './CommitList.jsx';
+import ContentList from './ContentList.jsx';
+import BreadCrumb from './BreadСrumb.jsx';
 
 import './Content.scss';
 
