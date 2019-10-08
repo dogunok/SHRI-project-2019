@@ -64,7 +64,7 @@ module.exports = class ParserRequest{
             [`ls-tree`, `-r`, `--name-only`, `${this._checkArg(params.commitHash, 'master')}`],
             {cwd: `./../${this.path}/${this._checkArg(params.repositoryId, '')}${this._checkArg(params['3'], '')}`, maxBuffer: 100000000},
             (err, out) => {
-                
+                console.log(`./../${this.path}/${this._checkArg(params.repositoryId, '')}${this._checkArg(params['3'], '')}`)
                 if(err) return res.send(err)
                 out.trim().split('\n').map((item, i) => allInfo.fileName.push(item));
             })
