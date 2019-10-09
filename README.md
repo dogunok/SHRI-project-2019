@@ -54,6 +54,7 @@
   Переходим в папку `node` и запускаем сервер командой `node server.js api/repos`<br />
   
   Переходим в корень репозитория и запускаем тесты: <br />
+  `selenium-standalone start` <br ?>
   
   `node_modules/.bin/hermione`<br />
 
