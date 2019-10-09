@@ -128,6 +128,16 @@
     };
 ```
 
+### 2)Вспомогательные функции
+
+Функцию никак не изменял для написания тестов
+
+```JS
+    _checkArg(arg, firstAnswer){
+        return arg === undefined ? firstAnswer : arg;
+    };
+```
+
  <h4>Результаты тестирования</h4>
 
  ![результат тестирования](./screenshots/unitTest-finish.png)
