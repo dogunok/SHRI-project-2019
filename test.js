@@ -1,36 +1,46 @@
 const assert = require('chai').assert;
-const fs = require('fs');
-const {execFile} = require('child_process');
+const ParserRequest = require('./node/parserRequest.js')
 
 const testPath = 'api/repos';
+const parser = new ParserRequest(testPath);
+
+
+
 
 describe('Контроллеры - обработчики запросов', () => {
     describe('Проверяем запрос на получение списка репозиториев', () => {
+
         it('На выходе должен получиться массив', () => {
-            fs.readdir('./' + testPath , (err, files) => {
-                const allRepos = files.filter(item => item[0] !== '.');
-                assert.typeOf(allRepos, 'array');
-            });
+            parser.getAllRepos (
+                {},
+                {send: (file) =>{ assert.typeOf(file, 'array')}},
+                './'
+            );
         });
 
         it('При получении данных приходит полный список репозиториев', () => {
 
-            const testStub = [ '351919-keksobooking',
-            'SHRE---2019_task-3',
-            'SHRE-2019__task-2',
-            'interactiveMap',
-            'proxygen',
-            'react',
-            'server-and-API' ];
+            const testStub =
+            [
+                 '351919-keksobooking',
+                'SHRE---2019_task-3',
+                'SHRE-2019__task-2',
+                'interactiveMap',
+                'proxygen',
+                'react',
+                'server-and-API'
+            ];
 
-            fs.readdir('./' + testPath , (err, files) => {
-                const allRepos = files.filter(item => item[0] !== '.');
-                assert.deepEqual(allRepos, testStub);
-            });
+            parser.getAllRepos (
+                {},
+                {send: (file) =>{ assert.deepEqual(file, testStub)}},
+                 './'
+            );
         });
     })
 
     describe('Проверяем запрос на получения всех файлов в ветке master и получаем весь log в master', () => {
+
 
         it('Данные входа совпадают с данными заглушкой', () => {
 
@@ -63,90 +73,42 @@ describe('Контроллеры - обработчики запросов', () 
                     'js/mydataarea.js' ]
             };
 
-            const allInfo =
-            {
-                fileName: [],
-                log: []
-            };
-
-            execFile('git' ,
-            [`ls-tree`, `-r`, `--name-only`, `master`],
-            {cwd: `./${testPath}/interactiveMap`, maxBuffer: 100000000},
-            (err, out) => {
-                out.trim().split('\n').map((item, i) => allInfo.fileName.push(item));
-            })
-
-            execFile('git' ,
-            [`log`, `--name-only`, `--pretty=format:%h:%an:%ar:%s`, `master`],
-            {cwd: `./${testPath}/interactiveMap`, maxBuffer: 100000000},
-            (err, out) => {
-                out.trim().split('\n').map((item, i) => allInfo.log.push(item));
-            })
-
-            const checkInfo = setInterval(() => {
-                if(allInfo.fileName.length > 0 && allInfo.log.length > 0){
-                    clearInterval(checkInfo)
-                    assert.deepEqual(allInfo, allInfoStub)
-                }
-            }, 100)
+            parser.getAllFilesInFolder (
+                {params: {
+                    repositoryId: 'interactiveMap',
+                    commitHash: 'master',
+                    "3": '',
+                    "0": 'tree'
+                }},
+                {send: (file) => {  assert.deepEqual(file, allInfoStub)}},
+                './'
+            )
         })
 
         it('На выходе "allFile.fileName" не изменил тип и он === "Array" ', () => {
-            const allInfo =
-            {
-                fileName: [],
-                log: []
-            };
-
-            execFile('git' ,
-            [`ls-tree`, `-r`, `--name-only`, `master`],
-            {cwd: `./${testPath}/interactiveMap`, maxBuffer: 100000000},
-            (err, out) => {
-                out.trim().split('\n').map((item, i) => allInfo.fileName.push(item));
-            })
-
-            execFile('git' ,
-            [`log`, `--name-only`, `--pretty=format:%h:%an:%ar:%s`, `master`],
-            {cwd: `./${testPath}/interactiveMap`, maxBuffer: 100000000},
-            (err, out) => {
-                out.trim().split('\n').map((item, i) => allInfo.log.push(item));
-            })
-
-            const checkInfo = setInterval(() => {
-                if(allInfo.fileName.length > 0 && allInfo.log.length > 0){
-                    clearInterval(checkInfo)
-                    assert.typeOf(allInfo.fileName, 'array', 'На выходе не "Array"')
-                }
-            }, 100)
+            parser.getAllFilesInFolder (
+                {params: {
+                    repositoryId: 'interactiveMap',
+                    commitHash: 'master',
+                    "3": '',
+                    "0": 'tree'
+                }},
+                {send: (file) => {  assert.typeOf(file.fileName, 'array', 'На выходе не "Array"')}},
+                './'
+            )
         })
 
         it('На выходе "allFile.log" не изменил тип и он === "Array" ', () => {
-            const allInfo =
-            {
-                fileName: [],
-                log: []
-            };
-
-            execFile('git' ,
-            [`ls-tree`, `-r`, `--name-only`, `master`],
-            {cwd: `./${testPath}/interactiveMap`, maxBuffer: 100000000},
-            (err, out) => {
-                out.trim().split('\n').map((item, i) => allInfo.fileName.push(item));
-            })
-
-            execFile('git' ,
-            [`log`, `--name-only`, `--pretty=format:%h:%an:%ar:%s`, `master`],
-            {cwd: `./${testPath}/interactiveMap`, maxBuffer: 100000000},
-            (err, out) => {
-                out.trim().split('\n').map((item, i) => allInfo.log.push(item));
-            })
-
-            const checkInfo = setInterval(() => {
-                if(allInfo.fileName.length > 0 && allInfo.log.length > 0){
-                    clearInterval(checkInfo);
-                    assert.typeOf(allInfo.log, 'array', 'На выходе не "Array"');
-                }
-            }, 100);
+            parser.getAllFilesInFolder (
+                {params: {
+                    repositoryId: 'interactiveMap',
+                    commitHash: 'master',
+                    "3": '',
+                    "0": 'tree'
+                }},
+                {send: (file) => {  assert.typeOf(file.log, 'array', 'На выходе не "Array"')}},
+                './'
+            )
         })
 
     })
@@ -155,16 +117,10 @@ describe('Контроллеры - обработчики запросов', () 
 
 describe('Вспомогательные функции', () => {
     it('Выбран верный аргумент', () => {
-        function checkArg(arg, firstAnswer) {
-            return arg === undefined ? firstAnswer : arg;
-        }
-        assert.equal(checkArg(undefined, 'master'), 'master');
+        assert.equal(parser._checkArg(undefined, 'master'), 'master');
     })
 
     it('На выходе должна быть строка', () => {
-        function checkArg(arg, firstAnswer) {
-            return arg === undefined ? firstAnswer : arg;
-        }
-        assert.typeOf(checkArg(undefined, 'master'), 'string');
+        assert.typeOf(parser._checkArg(undefined, 'master'), 'string');
     })
 })

@@ -7,8 +7,8 @@ module.exports = class ParserRequest{
         this.allComits = '';
     };
 
-    getAllRepos(req, res) {
-        fs.readdir('./../' + this.path , (err, files) => {
+    getAllRepos(req, res, sourceLocation = './../') {
+        fs.readdir(sourceLocation + this.path , (err, files) => {
             if(err) return res.send(err)
             const allRepos = files.filter(item => item[0] !== '.');
             res.send(allRepos);
@@ -50,7 +50,7 @@ module.exports = class ParserRequest{
         });
     };
 
-    getAllFilesInFolder(req, res){
+    getAllFilesInFolder(req, res, sourceLocation = './../'){
         const params = req.params;
 
         const allInfo = {
@@ -58,29 +58,31 @@ module.exports = class ParserRequest{
             log: []
         };
 
+        const checkAnswer = () => {
+            if(allInfo.fileName.length > 0 && allInfo.log.length > 0){
+                res.send(allInfo);
+            }
+        }
+
         if(params['0'].match('tree') || params['2'] === undefined){
+
             execFile('git' ,
             [`ls-tree`, `-r`, `--name-only`, `${this._checkArg(params.commitHash, 'master')}`],
-            {cwd: `./../${this.path}/${this._checkArg(params.repositoryId, '')}${this._checkArg(params['3'], '')}`, maxBuffer: 100000000},
+            {cwd: `${sourceLocation + this.path}/${this._checkArg(params.repositoryId, '')}${this._checkArg(params['3'], '')}`, maxBuffer: 100000000},
             (err, out) => {
                 if(err) return res.send(err);
                 out.trim().split('\n').map((item, i) => allInfo.fileName.push(item));
+                checkAnswer()
             });
 
             execFile('git' ,
             [`log`, `--name-only`, `--pretty=format:%h:%an:%ar:%s`, `${this._checkArg(params.commitHash, 'master')}`],
-            {cwd: `./../${this.path}/${this._checkArg(params.repositoryId, '')}${this._checkArg(params['3'], '')}`, maxBuffer: 100000000},
+            {cwd: `${sourceLocation + this.path}/${this._checkArg(params.repositoryId, '')}${this._checkArg(params['3'], '')}`, maxBuffer: 100000000},
             (err, out) => {
                 if(err) return res.send(err);
                 out.trim().split('\n').map((item, i) => allInfo.log.push(item));
+                checkAnswer()
             });
-
-            const checkInfo = setInterval(() => {
-                if(allInfo.fileName.length > 0 && allInfo.log.length > 0){
-                    clearInterval(checkInfo);
-                    res.send(allInfo);
-                }
-            }, 100);
 
         } else if(params['2'] !== undefined){
             res.status(404).send('Sorry cant find that!');
