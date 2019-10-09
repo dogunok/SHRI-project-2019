@@ -60,3 +60,74 @@
 
 
 <h3>Модульные тесты</h3>
+
+<h4>Запуск тестов</h4>
+
+`npm run unitTest`
+
+### 1)Обработчики запросов
+
+В проекте использовал два обработки запросов `getAllRepos` и `getAllFilesInFolder`, для обработчкив и написал тесты.
+
+Для тестирования в коде добавил `sourceLocation = './../'`, для того чтобы мог прописывать из какой дирректории идет запуск теста относительно обработчиков запроса
+
+<h4>getAllRepos</h4>
+
+```JS
+    getAllRepos(req, res, sourceLocation = './../') {
+        fs.readdir(sourceLocation + this.path , (err, files) => {
+            if(err) return res.send(err)
+            const allRepos = files.filter(item => item[0] !== '.');
+            res.send(allRepos);
+        });
+    };
+```
+
+
+<h4>getAllFilesInFolder</h4>
+
+```JS
+
+    getAllFilesInFolder(req, res, sourceLocation = './../'){
+        const params = req.params;
+
+        const allInfo = {
+            fileName: [],
+            log: []
+        };
+
+        const checkAnswer = () => {
+            if(allInfo.fileName.length > 0 && allInfo.log.length > 0){
+                res.send(allInfo);
+            }
+        }
+
+        if(params['0'].match('tree') || params['2'] === undefined){
+
+            execFile('git' ,
+            [`ls-tree`, `-r`, `--name-only`, `${this._checkArg(params.commitHash, 'master')}`],
+            {cwd: `${sourceLocation + this.path}/${this._checkArg(params.repositoryId, '')}${this._checkArg(params['3'], '')}`, maxBuffer: 100000000},
+            (err, out) => {
+                if(err) return res.send(err);
+                out.trim().split('\n').map((item, i) => allInfo.fileName.push(item));
+                checkAnswer()
+            });
+
+            execFile('git' ,
+            [`log`, `--name-only`, `--pretty=format:%h:%an:%ar:%s`, `${this._checkArg(params.commitHash, 'master')}`],
+            {cwd: `${sourceLocation + this.path}/${this._checkArg(params.repositoryId, '')}${this._checkArg(params['3'], '')}`, maxBuffer: 100000000},
+            (err, out) => {
+                if(err) return res.send(err);
+                out.trim().split('\n').map((item, i) => allInfo.log.push(item));
+                checkAnswer()
+            });
+
+        } else if(params['2'] !== undefined){
+            res.status(404).send('Sorry cant find that!');
+        };
+    };
+```
+
+ <h4>Результаты тестирования</h4>
+
+ ![результат тестирования](./screenshots/unitTest-finish.png)
