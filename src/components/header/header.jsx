@@ -10,7 +10,7 @@ export default class HeaderWrapper extends React.Component {
             allRepo: [],
             isLoaded: false,
             error: null,
-            nameRepo: window.location.pathname === '/' ? 'react' : window.location.pathname.split('/')[1]
+            nameRepo: window.location.pathname === '/' ? 'interactiveMap' : window.location.pathname.split('/')[1]
         }
     }
 

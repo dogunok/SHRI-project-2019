@@ -16,7 +16,7 @@
     "request": "^2.88.0"
   },
   "scripts": {
-    "start": "react-scripts start ",
+    "start": "git clone https://github.com/dogunok/interactiveMap.git api/repos/interactiveMap |react-scripts start ",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

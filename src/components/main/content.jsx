@@ -40,8 +40,8 @@ export default class Content extends React.Component {
     }
 
     componentDidMount() {
-        this._getAllFiles(window.location.pathname === '/' ? '/react' : window.location.pathname, 
-            window.location.pathname === '/' ? '/react' : window.location.pathname
+        this._getAllFiles(window.location.pathname === '/' ? '/interactiveMap' : window.location.pathname, 
+            window.location.pathname === '/' ? '/interactiveMap' : window.location.pathname
         )
     }
 
