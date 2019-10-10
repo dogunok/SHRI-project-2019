@@ -1,10 +1,23 @@
 import React from 'react';
-import Listrepo from './ListRepo.jsx';
+import ListRepo from './ListRepo';
 import logotype from '../../picture/logo.svg';
 import './Header.scss';
 
-export default class HeaderWrapper extends React.Component {
-    constructor(props) {
+interface PrevProps{
+    location: {pathname: string};
+    history: {location: {pathname: string}};
+}
+
+interface State {
+    allRepo: [];
+    isLoaded: boolean;
+    error: any;
+    nameRepo: string;
+  }
+
+
+export default class HeaderWrapper extends React.Component<{}, State> {
+    constructor(props: object) {
         super(props)
         this.state = {
             allRepo: [],
@@ -18,7 +31,7 @@ export default class HeaderWrapper extends React.Component {
         this._getAllRepo();
     }
 
-    componentDidUpdate(prevProps){
+    componentDidUpdate(prevProps: PrevProps){
         if(prevProps.history.location.pathname !== prevProps.location.pathname){
             this.setState({
                 nameRepo: prevProps.history.location.pathname.split('/')[1]
@@ -40,7 +53,7 @@ export default class HeaderWrapper extends React.Component {
                         <span className="header__repo-text">
                                 Repository <span className="header__repo-name">{this.state.nameRepo}</span>
                         </span>
-                        <Listrepo
+                        <ListRepo
                             list={['Loading']}
                         />
                         <svg className="header__toggle-icon" aria-hidden="true" width="12" height="9">
@@ -61,7 +74,7 @@ export default class HeaderWrapper extends React.Component {
                         <span className="header__repo-text">
                                 Repository <span className="header__repo-name">{this.state.nameRepo}</span>
                         </span>
-                        <Listrepo
+                        <ListRepo
                             list={this.state.allRepo}
                         />
                         <svg className="header__toggle-icon" aria-hidden="true" width="12" height="9">
