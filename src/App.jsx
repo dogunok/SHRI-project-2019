@@ -1,9 +1,9 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom'
 
-import Header from './components/Header/Header.jsx';
-import Content from './components/Main/Content.jsx';
-import Footer from './components/Footer/Footer.jsx'
+import Header from './components/header/Header.jsx';
+import Content from './components/main/Content.jsx';
+import Footer from './components/footer/Footer.jsx'
 import './App.scss';
 
 export default class App extends React.Component{
