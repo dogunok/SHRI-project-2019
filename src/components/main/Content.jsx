@@ -21,7 +21,7 @@ export default class Content extends React.Component {
     _getAllFiles(nameRepo, newPath){
         const repoPath = nameRepo.split('/');
         repoPath.splice(0, 2);
-        fetch(`http://localhost:3003/api/repos/${nameRepo.split('/')[1]}/tree/master/${repoPath.join('/')}`)
+        fetch(`http://localhost:3003/api/repos/${nameRepo.split('/')[1] || 'interactiveMap'}/tree/master/${repoPath.join('/')}`)
         .then(res => res.json())
         .then(
             (result) => {

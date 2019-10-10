@@ -95,7 +95,7 @@ export default function ContentListItem(props){
                                 choiceIcon(item.name)
                             }/>
                             <span className="info-file__name">
-                                <Link to={`${window.location.pathname}/${item.name}`}>
+                                <Link to={`${window.location.pathname === '/' ? 'interactiveMap' : window.location.pathname}/${item.name}`}>
                                     {item.name}
                                 </Link>
                             </span>
