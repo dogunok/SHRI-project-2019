@@ -1,5 +1,7 @@
 <h1>React Arcanum</h1>
 
+### Переходим в ветку `git checkout changing_code_to_react`
+
 <h2>Запуск приложения React</h2>
 
 Устанавливаем зависимости:<br />
@@ -9,7 +11,7 @@
 Запускать проект из корня дирректория:<br />
 
 Сначала запускаем сервер: <br />
-Переходим в папку node и от туда запускаем сервер <be />
+Переходим в папку `node` и от туда запускаем сервер <be />
 
 ### `node server.js api/repos`
 
@@ -53,10 +55,12 @@
   
   Переходим в папку `node` и запускаем сервер командой `node server.js api/repos`<br />
   
+  Запускаем `React` приложение `npm start` из корня репозитория <br />
+
   Переходим в корень репозитория и запускаем тесты: <br />
-  `selenium-standalone start` <br ?>
+  `selenium-standalone start` <br />
   
-  `node_modules/.bin/hermione`<br />
+  `npm run integrationTest`<br />
 
 
 <h3>Модульные тесты</h3>

@@ -16,11 +16,13 @@
     "request": "^2.88.0"
   },
   "scripts": {
-    "start": "git clone https://github.com/dogunok/interactiveMap.git api/repos/interactiveMap | react-scripts start ",
+    "start": "npm run cloneRepos | react-scripts start ",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "unitTest": "mocha"
+    "cloneRepos": "git clone https://github.com/dogunok/interactiveMap.git api/repos/interactiveMap",
+    "unitTest": "npm run cloneRepos | mocha",
+    "integrationTest": "node_modules/.bin/hermione"
   },
   "eslintConfig": {
     "extends": "react-app"

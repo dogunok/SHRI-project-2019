@@ -50,47 +50,47 @@ describe('Статическое тестирование', () => {
         })
     })
 
-    describe('Страница http://localhost:3000/react и ее блоки отображаются (запрос /api/repos/:repositoryId)', () => {
+    describe('Страница http://localhost:3000/interactiveMap и ее блоки отображаются (запрос /api/repos/:repositoryId)', () => {
 
-        it('Страница http://localhost:3000/react загружает контент (#root)', function() {
+        it('Страница http://localhost:3000/interactiveMap загружает контент (#root)', function() {
             return this.browser
-                .url('http://localhost:3000/react')
+                .url('http://localhost:3000/interactiveMap')
                 .isExisting('#root')
                 .then((exists) => {
                     assert.ok(exists, '#root не появился');
             })
         })
 
-        it('На странице http://localhost:3000/react присутствует блок .header', function() {
+        it('На странице http://localhost:3000/interactiveMap присутствует блок .header', function() {
             return this.browser
-                .url('http://localhost:3000/react')
+                .url('http://localhost:3000/interactiveMap')
                 .isExisting('.header')
                 .then((exists) => {
                     assert.ok(exists, '.header не появился');
             })
         })
     
-        it('На странице http://localhost:3000/react присутствует блок .main', function() {
+        it('На странице http://localhost:3000/interactiveMap присутствует блок .main', function() {
             return this.browser
-                .url('http://localhost:3000/react')
+                .url('http://localhost:3000/interactiveMap')
                 .waitForVisible('.main')
                 .then((exists) => {
                     assert.ok(exists, '.main не появился');
             })
         })
     
-        it('На странице http://localhost:3000/react присутствует блок .footer', function() {
+        it('На странице http://localhost:3000/interactiveMap присутствует блок .footer', function() {
             return this.browser
-                .url('http://localhost:3000/react')
+                .url('http://localhost:3000/interactiveMap')
                 .isExisting('.footer')
                 .then((exists) => {
                     assert.ok(exists, '.footer не появился');
             })
         })
     
-        it('На странице http://localhost:3000/react присутствует блок .header__repo_list ', function() {
+        it('На странице http://localhost:3000/interactiveMap присутствует блок .header__repo_list ', function() {
             return this.browser
-                .url('http://localhost:3000/react')
+                .url('http://localhost:3000/interactiveMap')
                 .isExisting('.header__repo_list')
                 .then((exists) => {
                     assert.ok(exists, 'список репозиториев не появился');
@@ -98,47 +98,47 @@ describe('Статическое тестирование', () => {
         })
     })
 
-    describe('Страница http://localhost:3000/react и ее блоки отображаются (запрос /:repositoryId*(/tree/:commitHash)?(/:path*)?)', () => {
+    describe('Страница http://localhost:3000/interactiveMap и ее блоки отображаются (запрос /:repositoryId*(/tree/:commitHash)?(/:path*)?)', () => {
 
-        it('Страница http://localhost:3000/react/scripts загружает контент (#root)', function() {
+        it('Страница http://localhost:3000/interactiveMap/css загружает контент (#root)', function() {
             return this.browser
-                .url('http://localhost:3000/react/scripts')
+                .url('http://localhost:3000/interactiveMap/css')
                 .isExisting('#root')
                 .then((exists) => {
                     assert.ok(exists, '#root не появился');
             })
         })
 
-        it('На странице http://localhost:3000/react/scripts присутствует блок .header', function() {
+        it('На странице http://localhost:3000/interactiveMap/css присутствует блок .header', function() {
             return this.browser
-                .url('http://localhost:3000/react/scripts')
+                .url('http://localhost:3000/interactiveMap/css')
                 .isExisting('.header')
                 .then((exists) => {
                     assert.ok(exists, '.header не появился');
             })
         })
     
-        it('На странице http://localhost:3000/react/scripts присутствует блок .main', function() {
+        it('На странице http://localhost:3000/interactiveMap/css присутствует блок .main', function() {
             return this.browser
-                .url('http://localhost:3000/react/scripts')
+                .url('http://localhost:3000/interactiveMap/css')
                 .waitForVisible('.main')
                 .then((exists) => {
                     assert.ok(exists, '.main не появился');
             })
         })
     
-        it('На странице http://localhost:3000/react/scripts присутствует блок .footer', function() {
+        it('На странице http://localhost:3000/interactiveMap/css присутствует блок .footer', function() {
             return this.browser
-                .url('http://localhost:3000/react/scripts')
+                .url('http://localhost:3000/interactiveMap/css')
                 .isExisting('.footer')
                 .then((exists) => {
                     assert.ok(exists, '.footer не появился');
             })
         })
 
-        it('На странице http://localhost:3000/react/scripts присутствует блок .header__repo_list ', function() {
+        it('На странице http://localhost:3000/interactiveMap/css присутствует блок .header__repo_list ', function() {
             return this.browser
-                .url('http://localhost:3000/react/scripts')
+                .url('http://localhost:3000/interactiveMap/css')
                 .isExisting('.header__repo_list')
                 .then((exists) => {
                     assert.ok(exists, 'список репозиториев не появился');
