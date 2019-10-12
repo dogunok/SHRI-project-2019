@@ -4,13 +4,40 @@ import { Link } from 'react-router-dom';
 import iconFolder from '../../picture/iconFolder.svg';
 import iconFile from '../../picture/iconFile.svg';
 
-export default function ContentListItem(props){
-    const allInfoFile = {};
-    const allInfoFileInArr = [];
+interface Props{
+    info: {
+        fileName: [];
+        log: [];
+    } ;
+}
+
+interface IntermediateValue{
+    changedFile?: any;
+    hash?: string;
+    autor?: string;
+    date?: string;
+    message?: string;
+}
+
+interface FileItem {
+    log: {
+        message?: string;
+        autor?: string;
+        date?: string;
+        hash?: string;
+    };
+    name: string;
+}
+
+
+
+export default function ContentListItem(props: Props){
+    const allInfoFile: any = {};
+    const allInfoFileInArr: object[] = [];
 
     function addFileNameinObject(){
         const fileName = props.info.fileName;
-        fileName.forEach(name => {
+        fileName.forEach((name:string) => {
             if(name.match('/')){
                 allInfoFile[name.split('/')[0]] = {};
                 allInfoFile[name.split('/')[0]].changed = false;
@@ -21,12 +48,12 @@ export default function ContentListItem(props){
         });
     }
 
-    function addInfoCommit(fn){
+    function addInfoCommit(fn: any){
         const splitInformation = fn();
         const keysInfoFile = Object.keys(allInfoFile);
 
         keysInfoFile.forEach(key => {
-            splitInformation.map(infoLog => {
+            splitInformation.map((infoLog: {changedFile: string[]}) => {
                 if(!allInfoFile[key].changed  && infoLog.changedFile.length > 0 && infoLog.changedFile.join('').match(key)){
                     allInfoFile[key].log = infoLog;
                     allInfoFile[key].changed = true;
@@ -40,13 +67,13 @@ export default function ContentListItem(props){
     function splitInformation(){
         addFileNameinObject();
 
-        let intermediateValue = {
+        let intermediateValue: IntermediateValue = {
             changedFile : []
         };
-        const finishValue = [];
+        const finishValue:  object[] = [];
         const infoFile = props.info.log;
 
-        infoFile.forEach((info, index) => {
+        infoFile.forEach((info: string, index: number) => {
             if(info.length === 0){
                 finishValue.push(intermediateValue);
                 intermediateValue = {
@@ -71,8 +98,8 @@ export default function ContentListItem(props){
 
     addInfoCommit(splitInformation);
 
-    function choiceIcon(namefile){
-        const allInfoFile = props.info.fileName;
+    function choiceIcon(namefile : string){
+        const allInfoFile: string[] = props.info.fileName;
 
         for(let i = 0; i < allInfoFile.length; i++){
             if(allInfoFile[i].match(namefile)
@@ -84,41 +111,36 @@ export default function ContentListItem(props){
             }
         }
     }
+
     return(
         <>
             {
-                allInfoFileInArr.map((item, index) => (
+                allInfoFileInArr.map(() => (fileItem: FileItem, index: number) => (
                     <li className="info-file" key={index}>
                         <div className="info-file__type">
                             <img className="info-file__type-picture" src={
-                                choiceIcon(item.name)
+                                choiceIcon(fileItem.name)
                             }/>
                             <span className="info-file__name">
-                                <Link to={`${window.location.pathname}/${item.name}`}>
-                                    {item.name}
+                                <Link to={`${window.location.pathname === '/' ? 'interactiveMap' : window.location.pathname}/${fileItem.name}`}>
+                                    {fileItem.name}
                                 </Link>
                             </span>
                         </div>
-
-                        <div className="info-file__commit-message">
-                            {item.log.message}
-                        </div>
-
-                        <div className="info-file__date">
-                            {item.log.date}
-                        </div>
-
-                        <div>
+                        <div className="info-file__hash-commit">
                             <a className="info-file__hash-commit-link" href="#">
-                                    {item.log.hash}
+                                {fileItem.log.hash}
                             </a>
-
-                            <div className="info-file__commiter commiter">
-
-                                {item.log.autor}
-                            </div>
                         </div>
-
+                        <div className="info-file__commit-message">
+                            {fileItem.log.message}
+                        </div>
+                        <div className="info-file__commiter commiter">
+                            {fileItem.log.autor}
+                        </div>
+                        <div className="info-file__date">
+                            {fileItem.log.date}
+                        </div>
                     </li>
                 ))
             }

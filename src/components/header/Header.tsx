@@ -3,7 +3,7 @@ import ListRepo from './ListRepo';
 import logotype from '../../picture/logo.svg';
 import './Header.scss';
 
-interface PrevProps{
+export default interface PrevProps{
     location: {pathname: string};
     history: {location: {pathname: string}};
 }

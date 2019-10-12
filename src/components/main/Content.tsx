@@ -1,24 +1,38 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 
-import CommitList from './CommitList.jsx';
-import ContentList from './ContentList.jsx';
-import BreadCrumb from './BreadСrumb.jsx';
+import CommitList from './CommitList';
+import ContentList from './ContentList';
+import BreadCrumb from './BreadСrumb';
 
 import './Content.scss';
 
-export default class Content extends React.Component {
-    constructor(props){
-        super(props);
+interface PrevProps{
+    location: {pathname: string};
+    history: {location: {pathname: string}};
+}
 
+interface State {
+    allRepo: {fileName: [], log: []};
+    isLoaded: boolean;
+    error: null;
+    nameRepo: string;
+    location: string;
+  }
+
+export default class Content extends React.Component<{}, State>{
+    constructor(props: object){
+        super(props);
         this.state = {
             error: null,
             isLoaded: false,
-            allRepo: [],
+            allRepo: {fileName: [], log: []},
+            location: '',
+            nameRepo: ''
           };
     }
 
-    _getAllFiles(nameRepo, newPath){
+    _getAllFiles(nameRepo:string, newPath:string){
         const repoPath = nameRepo.split('/');
         repoPath.splice(0, 2);
         fetch(`http://localhost:3003/api/repos/${nameRepo.split('/')[1] || 'interactiveMap'}/tree/master/${repoPath.join('/')}`)
@@ -40,12 +54,12 @@ export default class Content extends React.Component {
     }
 
     componentDidMount() {
-        this._getAllFiles(window.location.pathname === '/' ? '/interactiveMap' : window.location.pathname, 
+        this._getAllFiles(window.location.pathname === '/' ? '/interactiveMap' : window.location.pathname,
             window.location.pathname === '/' ? '/interactiveMap' : window.location.pathname
         )
     }
 
-    componentDidUpdate(prevProps){
+    componentDidUpdate(prevProps: PrevProps){
 
         if(prevProps.history.location.pathname !== prevProps.location.pathname){
             this.setState({
@@ -61,7 +75,7 @@ export default class Content extends React.Component {
     render(){
         if(this.state.error){
             return this.state.error
-        } else if(!this.state.isLoaded) { 
+        } else if(!this.state.isLoaded) {
             return (
                 <div className="wrapperLoading">
                     <div id="fountainTextG">
@@ -87,7 +101,9 @@ export default class Content extends React.Component {
                                 <svg className="header__toggle-icon" aria-hidden="true" width="12" height="9">
                                     <path className="header__toggle-icon_arrow" d="M6 7.5L.56 2.08l.88-.89L6 5.74l4.56-4.56.88.89z"></path>
                                 </svg>
-                                <CommitList />
+                                <CommitList 
+                                    infoBranch={[{name: 'testik', date: 1993}, {name: 'testik', date: 1993}]}
+                                />
                             </div>
                         </div>
                         <div className="main__commit-data">
@@ -101,7 +117,6 @@ export default class Content extends React.Component {
                         </nav>
                         <ContentList info={this.state.allRepo}/>
                         <div className="main__all-files main__all-files-mobile">
-    
                         </div>
                     </div>
                 </div>

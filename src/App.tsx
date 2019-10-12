@@ -1,13 +1,13 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom'
 
-import Header from './components/header/Header.jsx';
-import Content from './components/main/Content.jsx';
-import Footer from './components/footer/Footer.tsx'
+import Header from './components/header/Header';
+import Content from './components/main/Content';
+import Footer from './components/footer/Footer'
 import './App.scss';
 
 export default class App extends React.Component{
-    constructor(props) {
+    constructor(props: {}) {
         super(props);
       }
 
