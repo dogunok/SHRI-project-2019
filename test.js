@@ -1,5 +1,5 @@
 const assert = require('chai').assert;
-const ParserRequest = require('./node/parserRequest.js')
+const ParserRequest = require('./node/parserRequest.ts')
 
 const testPath = 'api/repos';
 const parser = new ParserRequest(testPath);

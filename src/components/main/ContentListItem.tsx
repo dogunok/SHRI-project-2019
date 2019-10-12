@@ -12,7 +12,7 @@ interface Props{
 }
 
 interface IntermediateValue{
-    changedFile?: any;
+    changedFile: string[];
     hash?: string;
     autor?: string;
     date?: string;
@@ -31,7 +31,7 @@ interface FileItem {
 
 
 
-export default function ContentListItem(props: Props){
+export default function ContentListItem(props: any){
     const allInfoFile: any = {};
     const allInfoFileInArr: object[] = [];
 
@@ -89,7 +89,9 @@ export default function ContentListItem(props: Props){
                 intermediateValue.changedFile.push(info);
                 if(infoFile.length - 1 === index){
                     finishValue.push(intermediateValue);
-                    intermediateValue = {};
+                    intermediateValue = {
+                        changedFile : []
+                    };
                 }
             }
         })
@@ -115,7 +117,7 @@ export default function ContentListItem(props: Props){
     return(
         <>
             {
-                allInfoFileInArr.map(() => (fileItem: FileItem, index: number) => (
+                allInfoFileInArr.map((fileItem: any, index: number) => (
                     <li className="info-file" key={index}>
                         <div className="info-file__type">
                             <img className="info-file__type-picture" src={

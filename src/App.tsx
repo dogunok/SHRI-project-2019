@@ -7,7 +7,7 @@ import Footer from './components/footer/Footer'
 import './App.scss';
 
 export default class App extends React.Component{
-    constructor(props: {}) {
+    constructor(props: any) {
         super(props);
       }
 

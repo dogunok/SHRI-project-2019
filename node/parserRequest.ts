@@ -1,7 +1,24 @@
 const fs = require('fs');
 const {execFile} = require('child_process');
-// const express = require('express');
 
+interface Res{
+    send: (item: {}) => void;
+    status: any;
+}
+
+interface Req{
+    params: {
+        commitHash: string;
+        repositoryId: string;
+        "3": string;
+        "0": string;
+        "2": string;
+        pathToFile: string;
+    }
+    body: {
+        url: string;
+    };
+}
 
  class ParserRequest {
     path: string;
@@ -12,7 +29,7 @@ const {execFile} = require('child_process');
         this.allComits = '';
     };
 
-    getAllRepos(req: any, res: any, sourceLocation = './../') {
+    getAllRepos(req: Req, res: Res, sourceLocation = './../') {
         fs.readdir(sourceLocation + this.path , (err: Error, files: any) => {
             if(err) return res.send(err)
             const allRepos = files.filter((item: any) => item[0] !== '.');
@@ -20,7 +37,7 @@ const {execFile} = require('child_process');
         });
     };
 
-    getAllCommits(req: any, res: any, sourceLocation = './../'){
+    getAllCommits(req: Req, res: Res, sourceLocation: any = './../' ){
         const params = req.params;
 
         type AllInfo = {
@@ -41,7 +58,7 @@ const {execFile} = require('child_process');
         });
     };
 
-    getDiff(req: any, res: any){
+    getDiff(req: Req, res: Res){
         const params = req.params
         execFile('git' ,
         ['diff', `${params.commitHash}^1..${params.commitHash}`],
@@ -53,12 +70,14 @@ const {execFile} = require('child_process');
         });
     };
 
-    getAllFilesInFolder(req: any, res: any, sourceLocation = './../'){
+    getAllFilesInFolder(req: Req, res: Res, sourceLocation = './../'){
+
         const params = req.params;
-       type AllInfo = {
-           fileName: string[];
-           log: string[];
-       };
+
+        type AllInfo = {
+            fileName: string[];
+            log: any[];
+        };
 
         const allInfo: AllInfo = {
             fileName: [],
@@ -93,7 +112,7 @@ const {execFile} = require('child_process');
                 if(err) return res.send(err);
                 out.trim()
                 .split('\n')
-                .map(() => (item: string) => allInfo.log
+                .map((item: any) => allInfo.log
                 .push(item));
 
                 checkAnswer()
@@ -104,7 +123,7 @@ const {execFile} = require('child_process');
         };
     };
 
-    getShowFile(req: any, res: any){
+    getShowFile(req: Req, res: Res){
         const params = req.params;
         execFile('git' ,
         ['show', `${params.commitHash}:${params.pathToFile}${params['0']}`],
@@ -115,7 +134,7 @@ const {execFile} = require('child_process');
         });
     };
 
-    addNewRepo(req: any, res: any){
+    addNewRepo(req: Req, res: Res){
         const inJson = req.body;
         execFile('git' ,
         ['clone', inJson.url],
@@ -126,7 +145,7 @@ const {execFile} = require('child_process');
         });
     };
 
-    deleteRepo(req: any, res: any){
+    deleteRepo(req: Req, res: Res){
         const params = req.params
         fs.rmdir('./' + this.path + '/' + params.repositoryId, (err: Error) => {
             if (err) throw err;

@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const routerr = require('./routes/routes');
+const routerModule = require('./routes/routes');
 const port: number = 3003;
 const app = express();
 
@@ -11,12 +11,12 @@ app.use(express.static('static'));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-routerr(app);
+routerModule(app);
 
 
 
 const server = app.listen(port, (err: Error) => {
     if(err) throw console.log(`error - ${err}`);
-    console.log(`Server listening on port ${server.address()} ${port}`);
+    console.log(`Server listening on port ${server.address().port}`);
 });
 

@@ -26,7 +26,7 @@ interface FileItem {
         date?: string;
         hash?: string;
     };
-    name?: any;
+    name?: string;
 }
 
 
@@ -113,7 +113,7 @@ export default function ContentListItem(props: Props){
     return(
         <>
             {
-                allInfoFileInArr.map(() => (fileItem: FileItem, index: number) => (
+                allInfoFileInArr.map((fileItem: any, index: number) => (
                     <li className="info-file" key={index}>
                         <div className="info-file__type">
                             <img className="info-file__type-picture" src={

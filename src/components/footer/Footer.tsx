@@ -14,7 +14,7 @@ export default function Footer(props: object){
                 <div className="years">
                         © 2007—2019
                 </div>
-                <a href="#">Yandex</a>
+                <a href="https://yandex.ru">Yandex</a>
             </div>
         </footer>
     )

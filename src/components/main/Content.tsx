@@ -13,9 +13,9 @@ interface PrevProps{
 }
 
 interface State {
-    allRepo: {fileName: [], log: []};
+    allRepo: any;
     isLoaded: boolean;
-    error: null;
+    error: any;
     nameRepo: string;
     location: string;
   }
@@ -102,7 +102,7 @@ export default class Content extends React.Component<{}, State>{
                                     <path className="header__toggle-icon_arrow" d="M6 7.5L.56 2.08l.88-.89L6 5.74l4.56-4.56.88.89z"></path>
                                 </svg>
                                 <CommitList 
-                                    infoBranch={[{name: 'testik', date: 1993}, {name: 'testik', date: 1993}]}
+                                    infoBranch={[]}
                                 />
                             </div>
                         </div>

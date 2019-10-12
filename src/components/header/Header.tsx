@@ -46,7 +46,7 @@ export default class HeaderWrapper extends React.Component<{}, State> {
         } else if (!isLoaded) {
             return (
                 <header className="header">
-                    <a className="header__logo" href="#">
+                    <a className="header__logo" href="https://yandex.ru">
                         <img src={logotype} alt="logotype"/>
                     </a>
                     <div className="header__repo">
@@ -65,7 +65,7 @@ export default class HeaderWrapper extends React.Component<{}, State> {
         } else {
             return(
                 <header className="header">
-                    <a className="header__logo" href="#">
+                    <a className="header__logo" href="https://yandex.ru">
                         <img src={logotype} alt="logotype"/>
                     </a>
                     <div className="header__repo" onMouseEnter={

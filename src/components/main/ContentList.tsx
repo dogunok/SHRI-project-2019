@@ -2,7 +2,7 @@ import React from 'react';
 import ContentListItem from './ContentListItem';
 import ContentListForMobile from './ContentListForMobile'
 
-export default function ContentList(props: {info: {fileName: [], log: []}}){
+export default function ContentList(props: any){
     return (
         <>
             <ul className="main__all-files main__all-files-desktop">
