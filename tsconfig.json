@@ -18,7 +18,7 @@
     "typeRoots": [
       "./node_modules/@types"
     ],
-    "isolatedModules": true,
+    "isolatedModules": false,
     "module": "esnext"
   },
   "include": [
