@@ -1,6 +1,6 @@
 <h1>React Arcanum</h1>
 
-### Переходим в ветку `git checkout changing_code_to_react`
+### Переходим в ветку `git checkout added_TS`
 
 <h2>Запуск приложения React</h2>
 
