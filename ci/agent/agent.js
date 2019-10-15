@@ -9,7 +9,6 @@ const serverPort = config.serverPort;
 const agentPort = config.agentPort;
 const pathRepo = config.repo;
 const pathServer = `http://localhost:${serverPort}`
-const pathAgent = `http://localhost:${agentPort}`;
 const app = express();
 
 

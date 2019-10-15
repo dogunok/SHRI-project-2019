@@ -2,6 +2,7 @@ const path = require('path');
 const request = require('request');
 const allAgent = [];
 const allInfoCommand = [];
+const allNumberBuild = []
 
 const router = (app, pathRepo) => {
     app.get(`/`, (req, res, next) => {
@@ -10,14 +11,12 @@ const router = (app, pathRepo) => {
 
     app.post(`/notify_agent`, (req, res, next) => {
         allAgent.push(req.body);
-        console.log(req.body)
         res.end()
     });
 
     app.post('/notify_build_result', (req, res, next) => {
         console.log('notify_build_result --- done');
         allInfoCommand.push(req.body)
-        console.log(allInfoCommand)
     })
 
     app.post('/buildRequest', (req, res, nex) => {
@@ -37,12 +36,23 @@ const router = (app, pathRepo) => {
                     function(err,httpResponse,body){
                         console.log(`${hostAgent}:${portAgent}`)
                         console.log('request done')
+                        allNumberBuild.push(body);
+                        res.send(body)
                     }
                 )
                 break
             }
         }
-        res.end()
+    })
+
+    app.get(`/build/:number`, (req, res) => {
+        const number = req.params.number
+        for(let i = 0; i < allNumberBuild.length; i++){
+            if(number === allInfoCommand[i].numberBuild){
+                res.send(allInfoCommand[i])
+                break
+            }
+        }
     })
 }
 module.exports = router;

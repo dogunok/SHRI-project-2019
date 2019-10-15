@@ -48,7 +48,6 @@ const agentRouter = (app, pathRepo, pathServer) => {
             maxBuffer: 1000000}, (err, out) => {
                 if(err) return res.send(err);
                 console.log(`Сменил ветку ${hashCommit}`)
-                console.log(out)
             });
         }
 
@@ -65,11 +64,11 @@ const agentRouter = (app, pathRepo, pathServer) => {
                 infoFinishCommand.stderr = stderr;
                 infoFinishCommand.numberBuild = getRandom(100000, 999999);
                 console.log(`${nameCommand[0]} ${nameCommand.slice(1).join(' ')} команда завершина`);
-                console.log(getRandom(100000, 999999))
+                console.log(infoFinishCommand.numberBuild)
                 console.log('Время выполнения = ', time, 'ms');
 
                 requestBuildInfo(pathServer + '/notify_build_result', infoFinishCommand)
-                res.end();
+                res.send(JSON.stringify(infoFinishCommand.numberBuild));
             }
         );
     });
