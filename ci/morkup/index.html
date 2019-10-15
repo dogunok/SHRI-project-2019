@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CI_for_project</title>
+    <style>
+        form{
+            display: flex;
+            flex-direction: column;
+            max-width: 200px;
+            margin: 0 auto;
+
+        }
+        .btnAgent{
+             background-color: red;
+             padding: 10px 5px;
+             width: max-content;
+             cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <form>
+        <label for="hashCommit">Хэш коммита</label>
+        <input type="text" id="hashCommit">
+
+        <label for="nameBuild">Комманда сборки</label>
+        <input type="text" id="nameBuild" required>
+
+        <button type="submit" class="btnAgent">Совершить сборку</button>
+    </form>
+
+<ul>
+    <li></li>
+</ul>
+    <script>
+        const btnAgent = document.querySelector('form');
+        const hashCommit = document.getElementById('hashCommit');
+        const nameBuild = document.getElementById('nameBuild');
+
+
+
+        btnAgent.addEventListener('submit', (evt) => {
+            const sendInfo = {
+            "hash": hashCommit.value,
+            "nameCommand": nameBuild.value
+        }
+            evt.preventDefault()
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', '/buildRequest', true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.send(JSON.stringify(sendInfo)) ;
+
+            xhr.onreadystatechange = function() {
+                if (xhr.status === 200 && xhr.readyState === 4) {
+                    console.log( xhr.responseText )
+                }
+            }
+        })
+    </script>
+</body>
+</html>
