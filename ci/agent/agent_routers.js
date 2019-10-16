@@ -31,21 +31,29 @@ const requestBuildInfo = (path, info) => {
 const agentRouter = (app, pathRepo, pathServer) => {
     app.post(`/`, (req, res, next) => {
         console.log('/')
-        let time = Date.now();
+        let executionTime = Date.now();
+        const  startTime = new Date();
         const hashCommit = req.body.hash;
         const nameCommand = req.body.nameCommand.split(' ');
+        const numberBuild = getRandom(100000, 999999);
+
         const infoFinishCommand = {
-            time: '',
+            time: {
+                start: startTime,
+                end: '',
+                execution: ''
+            },
             stdout: '',
             stderr: '',
-            numberBuild: ''
+            numberBuild: numberBuild,
+            statusBuild: true
         }
 
         if(hashCommit){
             execFile('git' ,
             ['checkout', hashCommit],
             {cwd: pathRepo,
-            maxBuffer: 1000000}, (err, out) => {
+            maxBuffer: 100000}, (err, out) => {
                 if(err) return res.send(err);
                 console.log(`Сменил ветку ${hashCommit}`)
             });
@@ -57,18 +65,20 @@ const agentRouter = (app, pathRepo, pathServer) => {
             {cwd: pathRepo,
             maxBuffer: 1000000},
             (err, out, stderr) => {
-                if(err) return res.send(err);
-                time = Date.now() - time;
-                infoFinishCommand.time = time;
+                if(err) return res.send(JSON.stringify({error: err, numberBuild: numberBuild, statusBuild: false}));
+                executionTime = Date.now() - executionTime;
+
+                infoFinishCommand.time.execution = executionTime;
+                infoFinishCommand.time.end = new Date();
                 infoFinishCommand.stdout = out;
                 infoFinishCommand.stderr = stderr;
-                infoFinishCommand.numberBuild = getRandom(100000, 999999);
+
                 console.log(`${nameCommand[0]} ${nameCommand.slice(1).join(' ')} команда завершина`);
-                console.log(infoFinishCommand.numberBuild)
-                console.log('Время выполнения = ', time, 'ms');
+                console.log(numberBuild)
+                console.log('Время выполнения = ', executionTime, 'ms');
 
                 requestBuildInfo(pathServer + '/notify_build_result', infoFinishCommand)
-                res.send(JSON.stringify(infoFinishCommand.numberBuild));
+                res.send(JSON.stringify(infoFinishCommand));
             }
         );
     });

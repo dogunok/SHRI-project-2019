@@ -41,11 +41,17 @@
 
         const pathServer = window.location.origin;
 
-        const addInfoBuild = (pathServer, numberBuild, parentElem) => {
-            for(let i = 0; i < numberBuild.length; i++){
+        const addInfoBuild = (pathServer, infoBuild, parentElem, status) => {
+            console.log(pathServer, infoBuild, parentElem, status, 'addInfoBuild')
+            for(let i = 0; i < infoBuild.length; i++){
                 const infoHTML = `
                     <li>
-                        <a href="${pathServer}/build/${numberBuild[i]}" target="_blank">${numberBuild[i]}</a>
+                        <div>
+                            <a href="${pathServer}/build/${infoBuild[i].number || infoBuild[i]}" target="_blank">${infoBuild[i].number || infoBuild[i]}</a>
+                        </div>
+                        <div class="statusBuild">
+                            ${infoBuild[i].status || status[i]}
+                        </div>
                     </li>
                 `
                 parentElem.insertAdjacentHTML('beforeend', infoHTML);
@@ -53,18 +59,21 @@
         }
 
         if(!sessionStorage.getItem('infoBuild')){
-            sessionStorage.setItem('infoBuild', '{"build": []}')
-        } else if(JSON.parse(sessionStorage.getItem('infoBuild')).build.length > 0){
-            addInfoBuild(pathServer, JSON.parse(sessionStorage.getItem('infoBuild')).build, parentInfoBuilds)
+            sessionStorage.setItem('infoBuild', '{"info": []}')
+        } else if(JSON.parse(sessionStorage.getItem('infoBuild')).info.length > 0){
+            addInfoBuild(pathServer, 
+            JSON.parse(sessionStorage.getItem('infoBuild')).info, 
+            parentInfoBuilds,
+            JSON.parse(sessionStorage.getItem('infoBuild')).info)
         }
 
 
 
 
-        const addInfoLocalStorage = (numberBuild) => {
+        const addInfoLocalStorage = (numberBuild, statusBuild) => {
            const infoBuild = sessionStorage.getItem('infoBuild');
            const parseInfoStorage = JSON.parse(infoBuild);
-           parseInfoStorage.build.push(numberBuild);
+           parseInfoStorage.info.push({number: numberBuild, status: statusBuild});
            sessionStorage.setItem('infoBuild', JSON.stringify(parseInfoStorage))
         }
 
@@ -81,9 +90,12 @@
 
             xhr.onreadystatechange = function() {
                 if (xhr.status === 200 && xhr.readyState === 4) {
-                    const numberBuild = xhr.responseText;
-                    addInfoLocalStorage(numberBuild)
-                    addInfoBuild(pathServer, [numberBuild], parentInfoBuilds)
+                    const numberBuild = JSON.parse(xhr.responseText).numberBuild;
+                    const statusBuild = JSON.parse(xhr.responseText).statusBuild;
+                    // console.log(JSON.parse(xhr.responseText))
+                    addInfoLocalStorage(numberBuild, statusBuild)
+                    console.log(JSON.parse(xhr.responseText))
+                    addInfoBuild(pathServer, [numberBuild], parentInfoBuilds, [statusBuild])
                 }
             }
         })

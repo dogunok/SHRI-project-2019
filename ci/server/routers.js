@@ -1,8 +1,9 @@
 const path = require('path');
 const request = require('request');
+const fs = require('fs')
 const allAgent = [];
 const allInfoCommand = [];
-const allNumberBuild = []
+const allNumberBuild = [];
 
 const router = (app, pathRepo) => {
     app.get(`/`, (req, res, next) => {
@@ -16,7 +17,13 @@ const router = (app, pathRepo) => {
 
     app.post('/notify_build_result', (req, res, next) => {
         console.log('notify_build_result --- done');
-        allInfoCommand.push(req.body)
+        fs.writeFile(`buildResult/${req.body.numberBuild}.json`, JSON.stringify(req.body), (err) =>{
+            if(err) throw err; // если возникла ошибка
+            console.log("Асинхронная запись файла завершена. ");
+            allInfoCommand.push(req.body)
+            res.end()
+        })
+        
     })
 
     app.post('/buildRequest', (req, res, nex) => {
